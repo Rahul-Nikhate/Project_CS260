@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     backgroundImage: {
       'blpt': "url('/images/neww.png')",
+      'formbg': "url('/images/unnamed.jpg')",
     },
     extend: {},
   },
