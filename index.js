@@ -59,6 +59,11 @@ app.post("/",function(req,res){
     // res.redirect("/");
 });
 
+app.get("/SignUp",function(req,res){
+    res.render("signup")
+})
+
+
 app.get("/form1",function(req,res){
     res.redirect("/form1f");
 });

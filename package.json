@@ -4,8 +4,8 @@
   "description": "Faculty Recruitment Portal",
   "main": "index.js",
   "scripts": {
-    "start": "vite",
-    "devcss": "npx tailwindcss -i ./public/styles/tailwind.css -o ./public/styles/style.css"
+    "start": "nodemon index.js",
+    "devcss": "npx tailwindcss -i ./public/styles/tailwind.css -o ./public/styles/style.css --watch"
   },
   "keywords": [],
   "author": "",
