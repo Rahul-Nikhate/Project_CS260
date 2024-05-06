@@ -50,7 +50,8 @@ app.post("/",function(req,res){
     query = 'Select Application_Number from applications WHERE Email="'+Emailt+'" AND Password="'+Password+'";'
     db.query(query,function(err,result,field){
         if(result.length>0){
-            AppNo = result[0];
+            AppNo = result[0].Application_Number;
+            Username=result[0].Username;
             res.redirect("/form1");
         }
         else{
