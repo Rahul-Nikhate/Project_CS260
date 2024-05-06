@@ -3,7 +3,8 @@ const express = require('express');
 const ejs = require("express");
 const app = express();
 const mysql = require("mysql2");
-const { fuchsia } = require('color-name');
+const bodyParser = require("body-parser");
+const notifier = require('node-notifier');
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -25,33 +26,37 @@ app.use(express.static("public"));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({extended:true}));
 
 
-
-let AppNo;
-
+var AppNo;
 
 
 app.get("/",function(req,res){
     res.render("index");
 });
 
-app.post("/index",function(req,res){
+app.post("/",function(req,res){
 
     // query = 'SELECT * FROM info WHERE '
-    Email=req.body.Email;
-    Password=req.body.Password;
-    query = 'Select Application_Number from applications WHERE Email="'+EMail+'" AND Password="'+Password+'";'
+    let Email=req.body.Email;
+    let Password=req.body.Password;
+    query = 'Select Application_Number from applications WHERE Email="'+Email+'" AND Password="'+Password+'";'
     db.query(query,function(err,result,field){
-        if(result[0].length>0){
-            AppNo = res[0];
+        if(result.length>0){
+            AppNo = result[0];
             res.redirect("/form1");
         }
         else{
-            throw err;
+            notifier.notify({
+                title : "Alert",
+                message: "Incorrect Email or Password"
+            });
+            res.redirect("/");
         }
     });
-
+    // console.log(Email);
+    // res.redirect("/");
 });
 
 app.get("/form1",function(req,res){
