@@ -29,16 +29,20 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:true}));
 
 
-var AppNo;
+var AppNo,Username,Department,Position;
 
+//Sign IN Page <----------------------------------------------------------------------------->
 
 app.get("/",function(req,res){
     res.render("index");
 });
 
 app.post("/",function(req,res){
-
-    // query = 'SELECT * FROM info WHERE '
+    let SignUp = req.body.SignUp;
+    if(SignUp == "SignUp"){
+        res.redirect("/SignUp");
+        return;
+    }
     let Email=req.body.Email;
     let Password=req.body.Password;
     query = 'Select Application_Number from applications WHERE Email="'+Email+'" AND Password="'+Password+'";'
@@ -55,14 +59,47 @@ app.post("/",function(req,res){
             res.redirect("/");
         }
     });
-    // console.log(Email);
-    // res.redirect("/");
 });
+
+//<------------------------------------------------------------------->
+
+
+//Sign UP <----------------------------------------------------------->
 
 app.get("/SignUp",function(req,res){
     res.render("signup")
-})
+});
 
+app.post("/SignUp",function(req,res){
+    let SignIn = req.body.SignIn;
+    if(SignIn == "SignIn"){
+        res.redirect("/");
+        return;
+    }
+    Username = req.body.Username;
+    let email = req.body.Email;
+    let password = req.body.Password;
+    let RePassword = req.body.RePassword;
+    Department = req.body.Department;
+    Position = req.body.Position;
+    if(password === RePassword){
+        query = 'INSERT INTO applications (Email,Password,Post,Department,Username) VALUES ("' + email + '","' + password + '","' + Position + '","' + Department + '","' + Username + '";';
+        db.query(query,function(err,result,fields){
+        });
+        res.redirect("/");
+        return;
+    }
+    else{
+        notifier.notify({
+            title : "Alert",
+            message: "The Re-entered Password does not match"
+        });
+        res.redirect("/SignUp");
+        return;
+    }
+});
+
+//<-------------------------------------------------------------------->
 
 app.get("/form1",function(req,res){
     res.redirect("/form1f");
