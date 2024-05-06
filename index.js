@@ -47,7 +47,7 @@ app.post("/",function(req,res){
     }
     let Emailt=req.body.Email;
     let Password=req.body.Password;
-    query = 'Select Application_Number from applications WHERE Email="'+Emailt+'" AND Password="'+Password+'";'
+    query = 'Select * from applications WHERE Email="'+Emailt+'" AND Password="'+Password+'";'
     db.query(query,function(err,result,field){
         if(result.length>0){
             AppNo = result[0].Application_Number;
