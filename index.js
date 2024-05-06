@@ -71,11 +71,6 @@ app.get("/SignUp",function(req,res){
 });
 
 app.post("/SignUp",function(req,res){
-    let SignIn = req.body.SignIn;
-    if(SignIn == "SignIn"){
-        res.redirect("/");
-        return;
-    }
     Username = req.body.Username;
     let email = req.body.Email;
     let password = req.body.Password;
