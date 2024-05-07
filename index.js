@@ -10,7 +10,7 @@ const db = mysql.createConnection({
     host: 'localhost',
     database: 'faculty_recruitment',
     user: 'root',
-    password: 'Pass@123'
+    password: 'harsh1980'
 });
 
 db.connect(function(error){
@@ -316,6 +316,90 @@ app.post("/form2f",function(req,res){
 });
 
 //<----------------------------------------------------------------------->
+
+//Form Page 3 <---------------------------------------------------------->
+app.get("/form3",function(req,res){
+    query = 'SELECT * FROM employment_history WHERE Application_Number = "' + AppNo + '";';
+    db.query(query,function(err,result,field){
+        if(result.length>0){
+            EmpHis=result;
+        }
+        // console.log(result,"hehe");
+    });
+    query = 'SELECT * FROM research_supervision WHERE Application_Number = "' + AppNo + '";';
+    db.query(query,function(err,result,field){
+        if(result.length>0){
+            ResSup=result;
+        }
+        // console.log(result,"hehe");
+    });
+    query = 'SELECT * FROM awards WHERE Application_Number = "' + AppNo + '";';
+    db.query(query,function(err,result,field){
+        if(result.length>0){
+            Aw=result;
+        }
+        // console.log(result,"hehe");
+    });
+    query = 'SELECT * FROM professional_society WHERE Application_Number = "' + AppNo + '";';
+    db.query(query,function(err,result,field){
+        if(result.length>0){
+            Rso=result;
+        }
+        // console.log(result,"hehe");
+    });
+    res.redirect("/form3f");
+});
+
+app.get("/form3f",function(req,res){
+    console.log(EmpHis);
+    res.render("form3",{AppNo:AppNo,Username:Username,EmpHis:EmpHis,ResSup:ResSup,Aw:Aw,Rso:Rso});
+
+});
+
+app.post("/form3f",function(req,res){
+    Eh_Position=req.body.Eh_Position;
+    Eh_Organisation=req.body.Eh_Organisation;
+    Eh_DOJ=req.body.Eh_DOJ;
+    Eh_DOL=req.body.Eh_DOL;
+    Rs_Name =req.body.Rs_Name;
+    Rs_Degree =req.body.Rs_Degree;
+    Rs_Title =req.body.Rs_Title;
+    Rs_Status =req.body.Rs_Status;
+    Rs_DOC =req.body.Rs_DOC;
+    Rs_DOS =req.body.Rs_DOS;
+    Aw_Name =req.body.Aw_Name;
+    Aw_Presentor =req.body.Aw_Presentor;
+    Aw_Year =req.body.Aw_Year;
+    Rso_Name =req.body.Rso_Name;
+    Rso_Status =req.body.Rso_Status;
+    query = 'DELETE FROM employment_history WHERE Application_Number = "' + AppNo + '";';
+    db.query(query,function(err,result,field){});
+    for(let i=0; i<Eh_Position.length;i++){
+        query = 'INSERT INTO employment_history VALUES ("'+AppNo+'","'+Eh_Position[i]+'","'+Eh_Organisation[i]+'","'+Eh_DOJ[i]+'","'+Eh_DOL[i]+'");';
+        db.query(query,function(err,result,field){});
+    }
+    query = 'DELETE FROM research_supervision WHERE Application_Number = "' + AppNo + '";';
+    db.query(query,function(err,result,field){});
+    for(let i=0; i<Rs_Name.length;i++){
+        query = 'INSERT INTO research_supervision VALUES ("'+AppNo+'","'+Rs_Name[i]+'","'+Rs_Degree[i]+'","'+Rs_Title[i]+'","'+Rs_Status[i]+'","'+Rs_DOS[i]+'","'+Rs_DOC[i]+'");';
+        db.query(query,function(err,result,field){});
+    }
+    query = 'DELETE FROM awards WHERE Application_Number = "' + AppNo + '";';
+    db.query(query,function(err,result,field){});
+    for(let i=0; i<Aw_Name.length;i++){
+        query = 'INSERT INTO awards VALUES ("'+Aw_Name[i]+'","'+AppNo+'","'+Aw_Presentor[i]+'","'+Aw_Year[i]+'");';
+        db.query(query,function(err,result,field){});
+    }
+    query = 'DELETE FROM professional_society WHERE Application_Number = "' + AppNo + '";';
+    db.query(query,function(err,result,field){});
+    for(let i=0; i<Rso_Name.length;i++){
+        query = 'INSERT INTO professional_society VALUES ("'+AppNo+'","'+Rso_Name[i]+'","'+Rso_Status[i]+'");';
+        db.query(query,function(err,result,field){});
+    }
+    res.redirect("/form1");
+});
+
+// ------------------------------------------------------------
 
 app.listen(3000, () => {
     console.log("The app start on http://localhost:3000");
