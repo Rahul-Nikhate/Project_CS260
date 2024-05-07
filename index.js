@@ -10,7 +10,7 @@ const db = mysql.createConnection({
     host: 'localhost',
     database: 'faculty_recruitment',
     user: 'root',
-    password: 'harsh1980'
+    password: 'Pass@123'
 });
 
 db.connect(function(error){
@@ -53,6 +53,8 @@ app.post("/",function(req,res){
         if(result.length>0){
             AppNo = result[0].Application_Number;
             Username=result[0].Username;
+            Department = result[0].Department;
+            Position = result[0].Post;
             res.redirect("/form1");
         }
         else{
@@ -153,13 +155,14 @@ app.post("/form1f",function(req,res){
     Pincode = req.body.Pincode;
     Department = req.body.Department;
     Position = req.body.Position;
-    query = 'DELETE * FROM personal_info WHERE Application_Number = "' + AppNo + '";';
+    query = 'DELETE FROM personal_info WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){});
     query = 'INSERT INTO personal_info VALUES ("'+ AppNo + '","'  + F_Name + '","' + M_Name + '","' + L_Name + '","' + DOB + '","' + Gender + '","' + 
             Nationality + '","' + ID_type + '","' + ID_no + '","' + Category + '","' + Email + '","' + Mobile_no + '","' + Add_l1 + '","' + Add_l2 + '","' + City + '","' + State + '","' + Pincode + '");';
     db.query(query,function(err,result,field){});
-    query= 'UPDATE applications SET Department = "'+Department+'", Position = "'+Position+'" WHERE Application_Number = '+AppNo+';';
-    db.query(query,function(err,result,field){});
+    query= 'UPDATE applications SET Department = "'+Department+'", Post = "'+Position+'" WHERE Application_Number = "'+AppNo+'";';
+    db.query(query,function(err,result,field){
+    });
     res.redirect("/form2");
 });
 

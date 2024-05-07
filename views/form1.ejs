@@ -87,14 +87,14 @@
                         <div class="sm:col-span-2">
                             <label class="block text-sm font-medium leading-6 text-gray-900">Date Of Birth&#42</label>
                             <div class="mt-2">
-                            <input name="DOB" value="<%= DOB%>" type="date"  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                            <input name="DOB" value="<%= DOB %>" type="date"  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                             </div>
                         </div>
                         <div class="sm:col-span-2">
                             <label class="block text-sm font-medium leading-6 text-gray-900">Nationality&#42</label>
                             <div class="mt-2">
                             <select id="Nationality" name="Nationality" value="<%=Nationality%>" class="block w-full h-9 rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                                <option value=""><%=Nationality%></option>
+                                <option value="<%=Nationality%>"><%=Nationality%></option>
                                 <option value="Indian">Indian</option>
                                 <option value="OCI">OCI</option>
                             </select>
@@ -104,7 +104,7 @@
                             <label class="block text-sm font-medium leading-6 text-gray-900">Gender&#42</label>
                             <div class="mt-2">
                             <select id="Gender" name="Gender" value="<%=Gender%>" class="block w-full h-9 rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                                <option value="<%=Gender%>">Select Gender</option>
+                                <option value="<%=Gender%>"><%= Gender %></option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                                 <option value="Other">Other</option>
@@ -116,7 +116,7 @@
                             <label class="block text-sm font-medium leading-6 text-gray-900">Category&#42</label>
                             <div class="mt-2">
                             <select id="Category" name="Category" value="<%= Category%>" class="block w-full h-9 rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                                <option value=""><%= Category%></option>
+                                <option value="<%= Category%>"><%= Category%></option>
                                 <option value="General">General</option>
                                 <option value="OBC">OBC</option>
                                 <option value="SC">SC</option>
@@ -130,7 +130,7 @@
                             <label class="block text-sm font-medium leading-6 text-gray-900">Department&#42</label>
                             <div class="mt-2">
                             <select id="Department" name="Department" value="<%= Department%>" class="block w-full h-9 rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                                <option value=""><%= Department%>t</option>
+                                <option value="<%= Department%>"><%= Department%></option>
                                 <option value="CSE">CSE</option>
                                 <option value="Electrical">Electrical</option>
                                 <option value="Mathematics">Mathematics</option>
@@ -143,8 +143,8 @@
                         <div class="sm:col-span-2">
                             <label class="block text-sm font-medium leading-6 text-gray-900">Position&#42</label>
                             <div class="mt-2">
-                            <select id="Postion" name="Postion" value="<%=Position%>" class="block w-full h-9 rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                                <option value="<%= Position%>">Select Position</option>
+                            <select id="Postion" name="Position" value="<%=Position%>" class="block w-full h-9 rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                                <option value="<%= Position%>"><%= Position%></option>
                                 <option value="Professor">Professor</option>
                                 <option value="Assistant Professor">Assistant Professor</option>
                                 <option value="Associate Professor">Associate Professor</option>
@@ -202,7 +202,7 @@
                         <div class="col-span-full">
                             <label class="block text-sm font-medium leading-6 text-gray-900">Address Line 2</label>
                             <div class="mt-2">
-                            <input type="text" name="Add_l1" value="<%= Add_l2%>"  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                            <input type="text" name="Add_l2" value="<%= Add_l2%>"  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                             </div>
                         </div>
 
