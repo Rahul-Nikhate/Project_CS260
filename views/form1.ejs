@@ -24,15 +24,15 @@
     </header>
 <!-- the form starts here  -->
     <div class="flex justify-center">
-        <div class="w-screen sm:w-8/12 border-2 rounded-lg border-blue-950 px-7 py-8 mb-4 bg-gray-200">
+        <div class="w-screen sm:w-8/12 border-2 rounded-lg border-blue-950 px-7 py-8 mb-4 bg-gray-100">
         <form id="application-form" method="POST" action="/form1f">
             <div class="space-y-12">
-            <div class="border-b border-gray-900/10 pb-12">
+            <div class="border-b border-gray-900/10 pb-5">
                 <p class="text-3xl mb-2 font-semibold leading-7 text-gray-900">Personal Information</p>
                 
-                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-[120] sm:grid-cols-6">
+                <div class="mt-10 mb-2 grid grid-cols-1 gap-x-6 gap-y-[120] sm:grid-cols-6">
                     <!-- Name Fields (3 fields in one row) -->
-                    <div class="bg-white sm:col-span-6 mt-2 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 py-5 px-5 rounded-md">
+                    <div class="bg-white border-2 border-gray-300 sm:col-span-6 mt-1 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 py-5 px-5 rounded-md">
                         <div class="sm:col-span-2 sm:col-start-1">
                             <label class="block text-sm font-medium leading-6 text-gray-900">First name&#42</label>
                             <div class="mt-2">
@@ -93,7 +93,8 @@
                         <div class="sm:col-span-2">
                             <label class="block text-sm font-medium leading-6 text-gray-900">Nationality&#42</label>
                             <div class="mt-2">
-                            <select id="Nationality" name="Nationality"  class="block w-full h-9 rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                            <select id="Nationality" name="Nationality" value="<%=Nationality%>" class="block w-full h-9 rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                                <option value=""><%=Nationality%></option>
                                 <option value="Indian">Indian</option>
                                 <option value="OCI">OCI</option>
                             </select>
@@ -102,7 +103,8 @@
                         <div class="sm:col-span-2">
                             <label class="block text-sm font-medium leading-6 text-gray-900">Gender&#42</label>
                             <div class="mt-2">
-                            <select id="Gender" name="Gender"  class="block w-full h-9 rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                            <select id="Gender" name="Gender" value="<%=Gender%>" class="block w-full h-9 rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                                <option value="<%=Gender%>">Select Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                                 <option value="Other">Other</option>
@@ -110,6 +112,45 @@
                             </div>
                         </div>
                         
+                        <div class="sm:col-span-2">
+                            <label class="block text-sm font-medium leading-6 text-gray-900">Category&#42</label>
+                            <div class="mt-2">
+                            <select id="Category" name="Category" value="<%= Category%>" class="block w-full h-9 rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                                <option value=""><%= Category%></option>
+                                <option value="General">General</option>
+                                <option value="OBC">OBC</option>
+                                <option value="SC">SC</option>
+                                <option value="ST">ST</option>
+                                <option value="PWD">PWD</option>
+                                <option value="EWS">EWS</option>
+                            </select>
+                            </div>
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label class="block text-sm font-medium leading-6 text-gray-900">Department&#42</label>
+                            <div class="mt-2">
+                            <select id="Department" name="Department" value="<%= Department%>" class="block w-full h-9 rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                                <option value=""><%= Department%>t</option>
+                                <option value="CSE">CSE</option>
+                                <option value="Electrical">Electrical</option>
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Mechanical">Mechanical</option>
+                                <option value="Chemical">Chemical</option>
+                                <option value="Physics">Physics</option>
+                            </select>
+                            </div>
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label class="block text-sm font-medium leading-6 text-gray-900">Position&#42</label>
+                            <div class="mt-2">
+                            <select id="Postion" name="Postion" value="<%=Position%>" class="block w-full h-9 rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                                <option value="<%= Position%>">Select Position</option>
+                                <option value="Professor">Professor</option>
+                                <option value="Assistant Professor">Assistant Professor</option>
+                                <option value="Associate Professor">Associate Professor</option>
+                            </select>
+                            </div>
+                        </div>
 
                         
                         
@@ -134,7 +175,7 @@
                         </div>
                     </div>
                     
-                    <div class="bg-white sm:col-span-6 mt-10 my-1 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 py-5 px-5 rounded-md">
+                    <div class="bg-white border-2 border-gray-300 sm:col-span-6 mt-4 my-1 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 py-5 px-5 rounded-md">
                         <div class="sm:col-span-6  border-b border-gray-900/30"><p class=" inline text-xl font-weight-450 leading-7 text-gray-900">Contact Information</p>
                         <br></div>
                         
