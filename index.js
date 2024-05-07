@@ -10,7 +10,7 @@ const db = mysql.createConnection({
     host: 'localhost',
     database: 'faculty_recruitment',
     user: 'root',
-    password: 'Pass@123'
+    password: 'harsh1980'
 });
 
 db.connect(function(error){
@@ -29,7 +29,8 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:true}));
 
 
-var AppNo,Username,Department,Position,F_Name,M_Name,L_Name,DOB,Gender,Nationality,ID_type,
+var AppNo,Username,Department,Position,
+F_Name,M_Name,L_Name,DOB,Gender,Nationality,ID_type,
 ID_no,Category,Email,Mobile_no,Add_l1,Add_l2,City,State,Pincode
 ;
 
@@ -130,7 +131,7 @@ app.get("/form1",function(req,res){
 
 app.get("/form1f",function(req,res){
     res.render("form1",{Username:Username,AppNo:AppNo,F_Name : F_Name,M_Name:M_Name,L_Name:L_Name,DOB:DOB,Gender:Gender,Nationality:Nationality,ID_type:ID_type,
-        ID_no:ID_no,Category:Category,Email:Email,Mobile_no:Mobile_no,Add_l1:Add_l1,Add_l2:Add_l2,City:City,State:State,Pincode:Pincode});
+        ID_no:ID_no,Category:Category,Email:Email,Mobile_no:Mobile_no,Add_l1:Add_l1,Add_l2:Add_l2,City:City,State:State,Pincode:Pincode,Department:Department,Position:Position});
 });
 
 app.post("/form1f",function(req,res){
@@ -150,10 +151,14 @@ app.post("/form1f",function(req,res){
     City = req.body.City;
     State = req.body.State;
     Pincode = req.body.Pincode;
+    Department = req.body.Department;
+    Position = req.body.Position;
     query = 'DELETE * FROM personal_info WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){});
     query = 'INSERT INTO personal_info VALUES ("'+ AppNo + '","'  + F_Name + '","' + M_Name + '","' + L_Name + '","' + DOB + '","' + Gender + '","' + 
             Nationality + '","' + ID_type + '","' + ID_no + '","' + Category + '","' + Email + '","' + Mobile_no + '","' + Add_l1 + '","' + Add_l2 + '","' + City + '","' + State + '","' + Pincode + '");';
+    db.query(query,function(err,result,field){});
+    query= 'UPDATE applications SET Department = "'+Department+'", Position = "'+Position+'" WHERE Application_Number = '+AppNo+';';
     db.query(query,function(err,result,field){});
     res.redirect("/form2");
 });
