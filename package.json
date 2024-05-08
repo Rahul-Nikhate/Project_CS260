@@ -71,6 +71,7 @@
     "micromatch": "^4.0.5",
     "minimatch": "^9.0.4",
     "minipass": "^7.0.4",
+    "multer": "^1.4.5-lts.1",
     "mysql2": "^3.9.7",
     "mz": "^2.7.0",
     "nanoid": "^3.3.7",
