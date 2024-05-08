@@ -38,7 +38,8 @@ add_uni=[],add_deg=[],add_bra=[],add_yoj=[],add_yoc=[],add_dur=[],add_per=[],add
 Eh_Position=[],Eh_Organisation,Eh_DOJ,Eh_DOL,EmpHis,
 Rs_Name=[],Rs_Degree,Rs_Title,Rs_Status,Rs_DOS,Rs_DOC,ResSup,
 Aw_Name=[],Aw_Presentor,Aw_Year,Aw,
-Rso_Name=[],Rso_Status,Rso
+Rso_Name=[],Rso_Status,Rso,
+res_con,tea_con,pro_ser,por_add
 ;
 
 //Sign IN Page <----------------------------------------------------------------------------->
@@ -408,7 +409,6 @@ app.get("/form3",function(req,res){
 
 app.get("/form3f",function(req,res){
     res.render("form3",{AppNo:AppNo,Username:Username,EmpHis:EmpHis,ResSup:ResSup,Aw:Aw,Rso:Rso});
-
 });
 
 app.post("/form3f",function(req,res){
@@ -466,6 +466,49 @@ app.post("/form3f",function(req,res){
 });
 
 // ------------------------------------------------------------
+
+//Form Page 5 <------------------------------------------------------------------->
+
+app.get("/form5",function(req,res){
+    Promise.all([
+        new Promise((resolve,reject) =>{
+            query = 'SELECT * FROM portfolio WHERE Application_Number = "' + AppNo + '";';
+            db.query(query,function(err,result,field){
+                if(result.length>0){
+                    res_con = result[0].research_contri;
+                    tea_con = result[0].teaching_contri;
+                    pro_ser = result[0].professional_service;
+                    por_add = result[0].additional;
+                }
+                resolve();
+            });
+        })
+    ]).then(() =>{
+        res.redirect("/form5f");
+    });
+});
+
+app.get("/form5f",function(req,res){
+    res.render("form5",{AppNo : AppNo,Username:Username,res_con:res_con,tea_con:tea_con,pro_ser:pro_ser,por_add:por_add});
+});
+
+app.post("/form5f",function(req,res){
+    res_con = req.body.res_con;
+    tea_con = req.body.tea_con;
+    pro_ser = req.body.pro_ser;
+    por_add = req.body.por_add;
+
+    query = 'DELETE FROM portfolio WHERE Application_Number = "' + AppNo + '";';
+    db.query(query,function(err,result,fields){});
+
+    query = 'INSERT INTO portfolio VALUES ("' + AppNo + '","' + res_con + '","' + tea_con + '","' + pro_ser + '","' + por_add + '");';
+    db.query(query,function(err,result,fields){});
+
+    res.redirect("/form6");
+    
+});
+
+//<---------------------------------------------------------------------------------->
 
 app.listen(3000, () => {
     console.log("The app start on http://localhost:3000");
