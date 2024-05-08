@@ -113,10 +113,20 @@ app.post("/SignUp",function(req,res){
 
 //Form Page 1 <--------------------------------------------------------->
 
-app.get("/form1",function(req,res){
-    query = 'SELECT * FROM personal_info WHERE Application_Number = "' + AppNo + '";';
-    db.query(query,function(err,result,field){
-        if(result.length>0){
+app.get("/form1", function(req, res) {
+    const query = 'SELECT * FROM personal_info WHERE Application_Number = "' + AppNo + '";';
+
+    new Promise((resolve, reject) => {
+        db.query(query, function(err, result, field) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        });
+    })
+    .then(result => {
+        if (result.length > 0) {
             F_Name = result[0].First_Name;
             M_Name = result[0].Middle_Name;
             L_Name = result[0].Last_Name;
@@ -135,9 +145,13 @@ app.get("/form1",function(req,res){
             State = result[0].State;
             Pincode = result[0].Pincode;
         }
-    });
-    res.redirect("/form1f");
+    })
+    .then(() => {
+        res.redirect("/form1f");
+    })
+    
 });
+
 
 app.get("/form1f",function(req,res){
     res.render("form1",{Username:Username,AppNo:AppNo,F_Name : F_Name,M_Name:M_Name,L_Name:L_Name,DOB:DOB,Gender:Gender,Nationality:Nationality,ID_type:ID_type,
