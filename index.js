@@ -337,52 +337,62 @@ app.post("/form2f",function(req,res){
 
 //Form Page 3 <---------------------------------------------------------->
 app.get("/form3",function(req,res){
-    query = 'SELECT * FROM employment_history WHERE Application_Number = "' + AppNo + '";';
-    db.query(query,function(err,result,field){
-        // if(result.length>0){
-            if(result == undefined){
-                EmpHis = [];
-            }
-            else EmpHis=result;
-            // console.log(EmpHis.length);
-        // }
-        // console.log(result,"hehe");
+    Promise.all([
+        new Promise((resolve, reject) => {
+            query = 'SELECT * FROM employment_history WHERE Application_Number = "' + AppNo + '";';
+            db.query(query,function(err,result,field){
+                if(result==undefined){
+                    EmpHis=[];
+                }
+                else{
+                    EmpHis=result;
+                }
+                resolve();
+            });
+        }),
+        new Promise((resolve, reject) => {
+            query = 'SELECT * FROM research_supervision WHERE Application_Number = "' + AppNo + '";';
+            db.query(query,function(err,result,field){
+                if(result==undefined){
+                    ResSup=[];
+                }
+                else{
+                    ResSup=result;
+                }
+                resolve();
+            });
+        }),
+        new Promise((resolve, reject) => {
+            query = 'SELECT * FROM awards WHERE Application_Number = "' + AppNo + '";';
+            db.query(query,function(err,result,field){
+                if(result==undefined){
+                    Aw=[];
+                }
+                else{
+                    Aw=result;
+                }
+                resolve();
+            });
+        }),
+        new Promise((resolve, reject) => {
+            query = 'SELECT * FROM professional_society WHERE Application_Number = "' + AppNo + '";';
+            db.query(query,function(err,result,field){
+                if(result==undefined){
+                    Rso=[];
+                }
+                else{
+                    Rso=result;
+                }
+                resolve();
+            });
+        })
+    ]).then(() => {
+        res.redirect("/form3f");
     });
-    query = 'SELECT * FROM research_supervision WHERE Application_Number = "' + AppNo + '";';
-    db.query(query,function(err,result,field){
-        // if(result.length>0){
-            if(result == undefined){
-                ResSup = [];
-            }
-            else ResSup=result;
-        // }
-        // console.log(result,"hehe");
-    });
-    query = 'SELECT * FROM awards WHERE Application_Number = "' + AppNo + '";';
-    db.query(query,function(err,result,field){
-        // if(result.length>0){
-            if(result == undefined){
-                Aw = [];
-            }
-            else Aw=result;
-        // }
-        // console.log(result,"hehe");
-    });
-    query = 'SELECT * FROM professional_society WHERE Application_Number = "' + AppNo + '";';
-    db.query(query,function(err,result,field){
-        // if(result.length>0){
-            if(result == undefined){
-                Rso = [];
-            }
-            else Rso=result;
-        // }
-        // console.log(result,"hehe");
-    });
-    res.redirect("/form3f");
 });
 
+
 app.get("/form3f",function(req,res){
-    // console.log(EmpHis);
     res.render("form3",{AppNo:AppNo,Username:Username,EmpHis:EmpHis,ResSup:ResSup,Aw:Aw,Rso:Rso});
 
 });
@@ -405,25 +415,36 @@ app.post("/form3f",function(req,res){
     Rso_Status =req.body.Rso_Status;
     query = 'DELETE FROM employment_history WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){});
-    for(let i=0; i<Eh_Position.length;i++){
+
+    let cnt = 0;
+    if(Eh_Position !== undefined) cnt = Eh_Position.length;
+    for(let i=0; i<cnt;i++){
         query = 'INSERT INTO employment_history VALUES ("'+AppNo+'","'+Eh_Position[i]+'","'+Eh_Organisation[i]+'","'+Eh_DOJ[i]+'","'+Eh_DOL[i]+'");';
         db.query(query,function(err,result,field){});
     }
+
+    
     query = 'DELETE FROM research_supervision WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){});
-    for(let i=0; i<Rs_Name.length;i++){
+    let cnt2=0;
+    if(Rs_Name !== undefined) cnt2 = Rs_Name.length;
+    for(let i=0; i<cnt2;i++){
         query = 'INSERT INTO research_supervision VALUES ("'+AppNo+'","'+Rs_Name[i]+'","'+Rs_Degree[i]+'","'+Rs_Title[i]+'","'+Rs_Status[i]+'","'+Rs_DOS[i]+'","'+Rs_DOC[i]+'");';
         db.query(query,function(err,result,field){});
     }
     query = 'DELETE FROM awards WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){});
-    for(let i=0; i<Aw_Name.length;i++){
-        query = 'INSERT INTO awards VALUES ("'+Aw_Name[i]+'","'+AppNo+'","'+Aw_Presentor[i]+'","'+Aw_Year[i]+'");';
+    let cnt3=0;
+    if(Aw_Name !== undefined) cnt3 = Aw_Name.length;
+    for(let i=0; i<cnt3;i++){
+        query = 'INSERT INTO awards VALUES ("'+AppNo+'","'+Aw_Name[i]+'","'+Aw_Presentor[i]+'","'+Aw_Year[i]+'");';
         db.query(query,function(err,result,field){});
     }
     query = 'DELETE FROM professional_society WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){});
-    for(let i=0; i<Rso_Name.length;i++){
+    let cnt4=0;
+    if(Rso_Name !== undefined) cnt4 = Rso_Name.length;
+    for(let i=0; i<cnt4;i++){
         query = 'INSERT INTO professional_society VALUES ("'+AppNo+'","'+Rso_Name[i]+'","'+Rso_Status[i]+'");';
         db.query(query,function(err,result,field){});
     }
