@@ -5,6 +5,7 @@ const app = express();
 const mysql = require("mysql2");
 const bodyParser = require("body-parser");
 const notifier = require('node-notifier');
+const multer = require('multer');
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -26,7 +27,7 @@ app.use(express.static("public"));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({extended:false}));
 
 
 var AppNo,Username,Department,Position,
@@ -39,7 +40,10 @@ Eh_Position=[],Eh_Organisation,Eh_DOJ,Eh_DOL,EmpHis,
 Rs_Name=[],Rs_Degree,Rs_Title,Rs_Status,Rs_DOS,Rs_DOC,ResSup,
 Aw_Name=[],Aw_Presentor,Aw_Year,Aw,
 Rso_Name=[],Rso_Status,Rso,
-res_con,tea_con,pro_ser,por_add
+res_con,tea_con,pro_ser,por_add,
+nij,nic,nnj,nnc,n_p,n_b,Ps,
+Pt,
+Pb
 ;
 
 //Sign IN Page <----------------------------------------------------------------------------->
@@ -467,6 +471,103 @@ app.post("/form3f",function(req,res){
 
 // ------------------------------------------------------------
 
+// Form page 4 --------------------------------------------------------------------
+
+app.get("/form4",function(req,res){
+    Promise.all([
+        new Promise((resolve, reject) => {
+            query = 'SELECT * FROM publication_summary WHERE Application_Number = "' + AppNo + '";';
+            db.query(query,function(err,result,field){
+                if(result==undefined){
+                    Ps=[];
+                }
+                else{
+                    Ps=result;
+                }
+                resolve();
+            });
+        }),
+        new Promise((resolve, reject) => {
+            query = 'SELECT * FROM publications WHERE Application_Number = "' + AppNo + '";';
+            db.query(query,function(err,result,field){
+                if(result==undefined){
+                    Pb=[];
+                }
+                else{
+                    Pb=result;
+                }
+                resolve();
+            });
+        }),
+        new Promise((resolve, reject) => {
+            query = 'SELECT * FROM patents WHERE Application_Number = "' + AppNo + '";';
+            db.query(query,function(err,result,field){
+                if(result==undefined){
+                    Pt=[];
+                }
+                else{
+                    Pt=result;
+                }
+                resolve();
+            });
+        })
+    ]).then(() => {
+        res.redirect("/form4f");
+    });
+});
+
+
+app.get("/form4f",function(req,res){
+    res.render("form4",{AppNo:AppNo,Username:Username,Pb:Pb,Ps:Ps,Pt:Pt});
+});
+
+app.post("/form4f",function(req,res){
+    nij=req.body.nij;
+    nic=req.body.nic;
+    nnj=req.body.nnj;
+    nnc=req.body.nnc;
+    n_p=req.body.n_p;
+    n_b=req.body.n_b;
+    var Pt_inventor=req.body.Pt_inventor;
+    var Pt_title=req.body.Pt_title;
+    var Pt_DOF=req.body.Pt_DOF;
+    var Pt_DOP=req.body.Pt_DOP;
+    var Pt_number=req.body.Pt_number;
+    var Pt_status=req.body.Pt_status;
+    var Pb_type = req.body.Pb_type;
+    var Pb_title = req.body.Pb_title;
+    var Pb_author = req.body.Pb_author;
+    var Pb_YOP = req.body.Pb_YOP;
+    var Pb_docid = req.body.Pb_docid;
+    console.log(Pt_inventor);
+    query ='DELETE FROM publication_summary WHERE Application_Number = "' + AppNo + '";';
+    db.query(query,function(err,result,field){});
+        query = 'INSERT INTO publication_summary VALUES ("'+AppNo+'","'+nij+'","'+nic+'","'+nnj+'","'+nnc+'","'+n_p+'","'+n_b+'");';
+        db.query(query,function(err,result,field){});
+
+    
+    query = 'DELETE FROM patents WHERE Application_Number = "' + AppNo + '";';
+    db.query(query,function(err,result,field){});
+    let cnt2=0;
+    if(Pt_inventor !== undefined) cnt2 = Pt_inventor.length;
+    for(let i=0; i<cnt2;i++){
+        query = 'INSERT INTO patents VALUES ("'+AppNo+'","'+Pt_inventor[i]+'","'+Pt_title[i]+'","'+Pt_DOF[i]+'","'+Pt_DOP[i]+'","'+Pt_number[i]+'","'+Pt_status[i]+'");';
+        db.query(query,function(err,result,field){});
+    }
+    query = 'DELETE FROM publications WHERE Application_Number = "' + AppNo + '";';
+    db.query(query,function(err,result,field){});
+    let cnt3=0;
+    if(Pb_type !== undefined) cnt3 = Pb_type.length;
+    for(let i=0; i<cnt3;i++){
+        query = 'INSERT INTO publications VALUES ("'+AppNo+'","'+Pb_type[i]+'","'+Pb_author[i]+'","'+Pb_title[i]+'","'+Pb_YOP[i]+'","'+Pb_docid[i]+'");';
+        db.query(query,function(err,result,field){});
+    }
+    
+    res.redirect("/form5");
+});
+
+// ------------------------------------------------------------------------
+
 //Form Page 5 <------------------------------------------------------------------->
 
 app.get("/form5",function(req,res){
@@ -507,6 +608,13 @@ app.post("/form5f",function(req,res){
     res.redirect("/form6");
     
 });
+
+//<---------------------------------------------------------------------------------->
+
+//Form Page 6 <------------------------------------------------------------------->
+
+
+
 
 //<---------------------------------------------------------------------------------->
 
