@@ -34,7 +34,11 @@ F_Name,M_Name,L_Name,DOB,Gender,Nationality,ID_type,ID_no,Category,Email,Mobile_
 phd_uni,phd_Dept,phd_sn,phd_dos,phd_yoj,phd_title,
 pg_uni,pg_deg,pg_bra,pg_yoj,pg_yoc,pg_dur,pg_per,pg_div,
 ug_uni,ug_deg,ug_bra,ug_yoj,ug_yoc,ug_dur,ug_per,ug_div,
-add_uni=[],add_deg=[],add_bra=[],add_yoj=[],add_yoc=[],add_dur=[],add_per=[],add_div=[],cnt_ae = 0
+add_uni=[],add_deg=[],add_bra=[],add_yoj=[],add_yoc=[],add_dur=[],add_per=[],add_div=[],cnt_ae = 0,
+Eh_Position=[],Eh_Organisation,Eh_DOJ,Eh_DOL,EmpHis,
+Rs_Name=[],Rs_Degree,Rs_Title,Rs_Status,Rs_DOS,Rs_DOC,ResSup,
+Aw_Name=[],Aw_Presentor,Aw_Year,Aw,
+Rso_Name=[],Rso_Status,Rso
 ;
 
 //Sign IN Page <----------------------------------------------------------------------------->
@@ -218,8 +222,9 @@ app.get("/form2",function(req,res){
 
     query = 'SELECT * FROM edu_add WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){
-        cnt_ae = result.length;
+        
         if(result.length>0){
+            cnt_ae = result.length;
             add_uni=[];add_deg=[];add_bra=[];add_yoj=[];add_yoc=[];add_dur=[];add_per=[];add_div=[];
             for(let i =0;i<result.length;i++){
                 add_uni[i]=result[i].University;
@@ -321,30 +326,30 @@ app.post("/form2f",function(req,res){
 app.get("/form3",function(req,res){
     query = 'SELECT * FROM employment_history WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){
-        if(result.length>0){
+        // if(result.length>0){
             EmpHis=result;
-        }
+        // }
         // console.log(result,"hehe");
     });
     query = 'SELECT * FROM research_supervision WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){
-        if(result.length>0){
+        // if(result.length>0){
             ResSup=result;
-        }
+        // }
         // console.log(result,"hehe");
     });
     query = 'SELECT * FROM awards WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){
-        if(result.length>0){
+        // if(result.length>0){
             Aw=result;
-        }
+        // }
         // console.log(result,"hehe");
     });
     query = 'SELECT * FROM professional_society WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){
-        if(result.length>0){
+        // if(result.length>0){
             Rso=result;
-        }
+        // }
         // console.log(result,"hehe");
     });
     res.redirect("/form3f");
