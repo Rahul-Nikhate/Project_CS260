@@ -5,7 +5,25 @@ const app = express();
 const mysql = require("mysql2");
 const bodyParser = require("body-parser");
 const notifier = require('node-notifier');
-const multer = require('multer');
+const multer  = require('multer');
+
+var AppNo;
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './upload')
+    },
+    filename: function (req, file, cb) {
+        let nm = file.originalname;
+        let ext = nm.substr(nm.lastIndexOf('.'));
+        if(exp !=='.pdf'){
+            exp = ".png";
+        }
+        cb(null, AppNo+file.fieldname+ext);
+    }
+  })
+
+const upload = multer({ storage:storage });
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -30,7 +48,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:false}));
 
 
-var AppNo,Username,Department,Position,
+var Username,Department,Position,
 F_Name,M_Name,L_Name,DOB,Gender,Nationality,ID_type,ID_no,Category,Email,Mobile_no,Add_l1,Add_l2,City,State,Pincode,
 phd_uni,phd_Dept,phd_sn,phd_dos,phd_yoj,phd_title,
 pg_uni,pg_deg,pg_bra,pg_yoj,pg_yoc,pg_dur,pg_per,pg_div,
@@ -611,13 +629,29 @@ app.post("/form5f",function(req,res){
 
 //<---------------------------------------------------------------------------------->
 
-//Form Page 6 <------------------------------------------------------------------->
+//Form Page 6 <-------------------------------------------------------------------------->
 
+app.get("/form6",function(req,res){
+    res.render("form6",{AppNo:AppNo,Username:Username});
+});
 
+app.post("/form6",upload.fields([{name : d_phd},{name : d_pg},{name : d_ug},{name : d_12},{name : d_10},{name : d_add}]),function(req,res){
+    let snn = req.body.snn;
+    if(snn == "snn"){
+        res.redirect("/form7");
+    }
+    else res.redirect("/form6");
+});
 
+//<---------------------------------------------------------------------------------------->
 
-//<---------------------------------------------------------------------------------->
+//Form Page 7 <------------------------------------------------------------------------------->
 
+app.get("/form7",function(req,res){
+    res.render("form7");
+});
+
+//<---------------------------------------------------------------------------------------------->
 app.listen(3000, () => {
     console.log("The app start on http://localhost:3000");
 });
