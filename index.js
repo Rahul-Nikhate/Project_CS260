@@ -178,68 +178,79 @@ app.post("/form1f",function(req,res){
 
 //Form Page 2 <---------------------------------------------------------->
 
-app.get("/form2",function(req,res){
-    query = 'SELECT * FROM phd WHERE Application_Number = "' + AppNo + '";';
-    db.query(query,function(err,result,fields){
-        if(result.length>0){
-            phd_uni=result[0].University;
-            phd_Dept = result[0].Department;
-            phd_sn = result[0].Supervisior_Name;
-            phd_dos = result[0].Date_Of_Success;
+function queryDB(sql) {
+    return new Promise((resolve, reject) => {
+        db.query(sql,function(err, result, fields) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+}
+
+app.get("/form2", async function(req,res){
+
+    try{
+        const PhDr = await queryDB('SELECT * FROM phd WHERE Application_Number = "' + AppNo + '";');
+        if(PhDr.length>0){
+            phd_uni=PhDr[0].University;
+            phd_Dept = PhDr[0].Department;
+            phd_sn = PhDr[0].Supervisior_Name;
+            phd_dos = PhDr[0].Date_Of_Success;
             phd_dos = phd_dos.toISOString().split("T")[0];
-            phd_yoj = result[0].Year_Of_Joining;
-            phd_title = result[0].Title;
+            phd_yoj = PhDr[0].Year_Of_Joining;
+            phd_title = PhDr[0].Title;
         }
-    });
-    
-    query = 'SELECT * FROM pg WHERE Application_Number = "' + AppNo + '";';
-    db.query(query,function(err,result,field){
-        if(result.length>0){
-            pg_uni=result[0].University;
-            pg_deg=result[0].Degree;
-            pg_bra=result[0].Branch;
-            pg_yoj=result[0].Year_Of_Joining;
-            pg_yoc=result[0].Year_Of_Completion;
-            pg_dur=result[0].Duration;
-            pg_per=result[0].Percentage;
-            pg_div=result[0].Division;
-        }
-    });
 
-    query = 'SELECT * FROM ug WHERE Application_Number = "' + AppNo + '";';
-    db.query(query,function(err,result,field){
-        if(result.length>0){
-            ug_uni=result[0].University;
-            ug_deg=result[0].Degree;
-            ug_bra=result[0].Branch;
-            ug_yoj=result[0].Year_Of_Joining;
-            ug_yoc=result[0].Year_Of_Completion;
-            ug_dur=result[0].Duration;
-            ug_per=result[0].Percentage;
-            ug_div=result[0].Division;
+        const pgr = await queryDB('SELECT * FROM pg WHERE Application_Number = "' + AppNo + '";');
+        if(pgr.length>0){
+            pg_uni=pgr[0].University;
+            pg_deg=pgr[0].Degree;
+            pg_bra=pgr[0].Branch;
+            pg_yoj=pgr[0].Year_Of_Joining;
+            pg_yoc=pgr[0].Year_Of_Completion;
+            pg_dur=pgr[0].Duration;
+            pg_per=pgr[0].Percentage;
+            pg_div=pgr[0].Division;
         }
-    });
 
-    query = 'SELECT * FROM edu_add WHERE Application_Number = "' + AppNo + '";';
-    db.query(query,function(err,result,field){
-        
-        if(result.length>0){
-            cnt_ae = result.length;
+        const ugr = await queryDB('SELECT * FROM ug WHERE Application_Number = "' + AppNo + '";');
+        if(ugr.length>0){
+            ug_uni=ugr[0].University;
+            ug_deg=ugr[0].Degree;
+            ug_bra=ugr[0].Branch;
+            ug_yoj=ugr[0].Year_Of_Joining;
+            ug_yoc=ugr[0].Year_Of_Completion;
+            ug_dur=ugr[0].Duration;
+            ug_per=ugr[0].Percentage;
+            ug_div=ugr[0].Division;
+        }
+
+        const aedur = await queryDB('SELECT * FROM edu_add WHERE Application_Number = "' + AppNo + '";');
+        if(aedur.length>0){
+            cnt_ae = aedur.length;
             add_uni=[];add_deg=[];add_bra=[];add_yoj=[];add_yoc=[];add_dur=[];add_per=[];add_div=[];
-            for(let i =0;i<result.length;i++){
-                add_uni[i]=result[i].University;
-                add_deg[i]=result[i].Degree;
-                add_bra[i]=result[i].Branch;
-                add_yoj[i]=result[i].Year_Of_Joining;
-                add_yoc[i]=result[i].Year_Of_Completion;
-                add_dur[i]=result[i].Duration;
-                add_per[i]=result[i].Percentage;
-                add_div[i]=result[i].Division;
+            for(let i =0;i<aedur.length;i++){
+                add_uni[i]=aedur[i].University;
+                add_deg[i]=aedur[i].Degree;
+                add_bra[i]=aedur[i].Branch;
+                add_yoj[i]=aedur[i].Year_Of_Joining;
+                add_yoc[i]=aedur[i].Year_Of_Completion;
+                add_dur[i]=aedur[i].Duration;
+                add_per[i]=aedur[i].Percentage;
+                add_div[i]=aedur[i].Division;
             }
         }
-    });
 
-    res.redirect("/form2f");
+        res.redirect("/form2f");
+
+    }
+    catch(error){
+        console.error("Error fetching data:", error);
+    }
+
 });
 
 app.get("/form2f",function(req,res){
@@ -309,7 +320,9 @@ app.post("/form2f",function(req,res){
     db.query(query,function(err,result,field){});
 
     // console.log(add_uni.length);
-    for(let i = 0;i<add_uni.length;i++){
+    let nf = 0;
+    if(add_uni !== undefined) nf = add_uni.length;
+    for(let i = 0;i<nf;i++){
 
         query = 'INSERT INTO edu_add VALUES ("'+AppNo +'","'+ add_uni[i] +'","'+ add_deg[i] +'","'+ add_bra[i] +'","'+ add_yoj[i] +'","'+ add_yoc[i] +'","'+ add_dur[i] +'","'+ add_per[i] +'","'+ add_div[i]+'");';
         db.query(query,function(err,result,field){});
@@ -327,28 +340,41 @@ app.get("/form3",function(req,res){
     query = 'SELECT * FROM employment_history WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){
         // if(result.length>0){
-            EmpHis=result;
+            if(result == undefined){
+                EmpHis = [];
+            }
+            else EmpHis=result;
+            // console.log(EmpHis.length);
         // }
         // console.log(result,"hehe");
     });
     query = 'SELECT * FROM research_supervision WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){
         // if(result.length>0){
-            ResSup=result;
+            if(result == undefined){
+                ResSup = [];
+            }
+            else ResSup=result;
         // }
         // console.log(result,"hehe");
     });
     query = 'SELECT * FROM awards WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){
         // if(result.length>0){
-            Aw=result;
+            if(result == undefined){
+                Aw = [];
+            }
+            else Aw=result;
         // }
         // console.log(result,"hehe");
     });
     query = 'SELECT * FROM professional_society WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){
         // if(result.length>0){
-            Rso=result;
+            if(result == undefined){
+                Rso = [];
+            }
+            else Rso=result;
         // }
         // console.log(result,"hehe");
     });
@@ -356,7 +382,7 @@ app.get("/form3",function(req,res){
 });
 
 app.get("/form3f",function(req,res){
-    console.log(EmpHis);
+    // console.log(EmpHis);
     res.render("form3",{AppNo:AppNo,Username:Username,EmpHis:EmpHis,ResSup:ResSup,Aw:Aw,Rso:Rso});
 
 });
