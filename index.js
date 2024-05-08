@@ -422,28 +422,29 @@ app.post("/form3f",function(req,res){
         query = 'INSERT INTO employment_history VALUES ("'+AppNo+'","'+Eh_Position[i]+'","'+Eh_Organisation[i]+'","'+Eh_DOJ[i]+'","'+Eh_DOL[i]+'");';
         db.query(query,function(err,result,field){});
     }
+
     
-    cnt=0;
-    if(Rs_Name !== undefined) cnt = Rs_Name.length;
     query = 'DELETE FROM research_supervision WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){});
-    for(let i=0; i<cnt;i++){
+    let cnt2=0;
+    if(Rs_Name !== undefined) cnt2 = Rs_Name.length;
+    for(let i=0; i<cnt2;i++){
         query = 'INSERT INTO research_supervision VALUES ("'+AppNo+'","'+Rs_Name[i]+'","'+Rs_Degree[i]+'","'+Rs_Title[i]+'","'+Rs_Status[i]+'","'+Rs_DOS[i]+'","'+Rs_DOC[i]+'");';
         db.query(query,function(err,result,field){});
     }
     query = 'DELETE FROM awards WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){});
-    cnt=0;
-    if(Aw_Name !== undefined) cnt = Aw_Name.length;
-    for(let i=0; i<cnt.length;i++){
-        query = 'INSERT INTO awards VALUES ("'+Aw_Name[i]+'","'+AppNo+'","'+Aw_Presentor[i]+'","'+Aw_Year[i]+'");';
+    let cnt3=0;
+    if(Aw_Name !== undefined) cnt3 = Aw_Name.length;
+    for(let i=0; i<cnt3;i++){
+        query = 'INSERT INTO awards VALUES ("'+AppNo+'","'+Aw_Name[i]+'","'+Aw_Presentor[i]+'","'+Aw_Year[i]+'");';
         db.query(query,function(err,result,field){});
     }
     query = 'DELETE FROM professional_society WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){});
-    cnt=0;
-    if(Rso_Name !== undefined) cnt = Rso_Name.length;
-    for(let i=0; i<cnt.length;i++){
+    let cnt4=0;
+    if(Rso_Name !== undefined) cnt4 = Rso_Name.length;
+    for(let i=0; i<cnt4;i++){
         query = 'INSERT INTO professional_society VALUES ("'+AppNo+'","'+Rso_Name[i]+'","'+Rso_Status[i]+'");';
         db.query(query,function(err,result,field){});
     }
