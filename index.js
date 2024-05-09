@@ -56,14 +56,14 @@ phd_uni,phd_Dept,phd_sn,phd_dos,phd_yoj,phd_title,
 pg_uni,pg_deg,pg_bra,pg_yoj,pg_yoc,pg_dur,pg_per,pg_div,
 ug_uni,ug_deg,ug_bra,ug_yoj,ug_yoc,ug_dur,ug_per,ug_div,
 add_uni=[],add_deg=[],add_bra=[],add_yoj=[],add_yoc=[],add_dur=[],add_per=[],add_div=[],cnt_ae = 0,
-Eh_Position=[],Eh_Organisation=[],Eh_DOJ=[],Eh_DOL=[],EmpHis=[],
+Eh_Position=[],Eh_Organisation=[],Eh_DOJ=[],Eh_DOL=[],EmpHis=[],Eh_DOJi=[],Eh_DOLi=[],
 Rs_Name=[],Rs_Degree=[],Rs_Title=[],Rs_Status=[],Rs_DOS=[],Rs_DOC=[],ResSup,
 Aw_Name=[],Aw_Presentor=[],Aw_Year=[],Aw,
 Rso_Name=[],Rso_Status=[],Rso,
 res_con,tea_con,pro_ser,por_add,
 nij,nic,nnj,nnc,n_p,n_b,Ps={inter_journals:4},
-Pt,Pt_inventor,Pt_title,Pt_DOF,Pt_DOP,Pt_number,Pt_status,
-Pb,Pb_type,Pb_title,Pb_type,Pb_author,Pb_YOP,Pb_docid,
+Pt,Pt_inventor=[],Pt_title=[],Pt_DOF=[],Pt_DOP=[],Pt_number=[],Pt_status=[],Pt_DOFi=[],Pt_DOPi=[],
+Pb,Pb_type=[],Pb_title=[],Pb_type=[],Pb_author=[],Pb_YOP=[],Pb_docid=[],
 d_phd,d_pg,d_ug,d_12,d_10,d_add,d_pro,d_sig
 ;
 
@@ -395,22 +395,22 @@ app.get("/form3",function(req,res){
             db.query(query,function(err,result,field){
                 if(result.length>0){
                     EmpHis=result;
-                    console.log(EmpHis);
+                    // console.log(EmpHis);
                     for(let i=0;i<result.length;i++){
                         Eh_Position[i]=result[i].Position;
                         Eh_Organisation[i]=result[i].Organisation;
-                        Eh_DOJ[i]=result[i].Date_Of_Joining;
-                        console.log(Eh_DOJ[i]);
-                        Eh_DOJ[i]=Eh_DOJ[i].toISOString().split("T")[0];
-                        Eh_DOL[i]=result[i].Date_Of_Leaving;
-                        Eh_DOL[i]=Eh_DOL[i].toISOString().split("T")[0];
+                        Eh_DOJi[i]=result[i].Date_Of_Joining;
+                        Eh_DOJ[i]=Eh_DOJi[i].toISOString().split("T")[0];
+                        Eh_DOLi[i]=result[i].Date_Of_Leaving;
+                        Eh_DOL[i]=Eh_DOLi[i].toISOString().split("T")[0];
                     }
                     
                     
                 }
                 else{
                     EmpHis=[];
-                }console.log(Eh_Position,Eh_Organisation,Eh_DOJ,Eh_DOL);
+                }
+                // console.log(Eh_Position,Eh_Organisation,Eh_DOJ,Eh_DOL);
                 resolve();
             });
         }),
@@ -571,7 +571,7 @@ app.post("/form3f",function(req,res){
         }
     }
     
-    res.redirect("/form1");
+    res.redirect("/form4");
 });
 
 // ------------------------------------------------------------
@@ -583,11 +583,17 @@ app.get("/form4",function(req,res){
         new Promise((resolve, reject) => {
             query = 'SELECT * FROM publication_summary WHERE Application_Number = "' + AppNo + '";';
             db.query(query,function(err,result,field){
-                if(result==[]){
-                    Ps=[];
+                if(result.length>0){
+                    Ps=result[0];
+                    nij=result[0].inter_journals;
+                    nic=result[0].inter_conference;
+                    nnj=result[0].nat_journals;
+                    nnc=result[0].nat_conference;
+                    n_p=result[0].no_Of_patents;
+                    n_b=result[0].no_of_books;
                 }
                 else{
-                    Ps=result[0];
+                    Ps=[];
                 }
                 resolve();
             });
@@ -595,11 +601,18 @@ app.get("/form4",function(req,res){
         new Promise((resolve, reject) => {
             query = 'SELECT * FROM publications WHERE Application_Number = "' + AppNo + '";';
             db.query(query,function(err,result,field){
-                if(result==undefined){
-                    Pb=[];
+                if(result.length>0){
+                    Pb=result;
+                    for(let i=0;i<result.length;i++){
+                        Pb_author[i]=result[i].author;
+                        Pb_docid[i]=result[i].document_id;
+                        Pb_YOP[i]=result[i].year_of_publication;
+                        Pb_title[i]=result[i].title;
+                        Pb_type[i]=result[i].type;
+                    }
                 }
                 else{
-                    Pb=result;
+                    Pb=[];
                 }
                 resolve();
             });
@@ -607,11 +620,21 @@ app.get("/form4",function(req,res){
         new Promise((resolve, reject) => {
             query = 'SELECT * FROM patents WHERE Application_Number = "' + AppNo + '";';
             db.query(query,function(err,result,field){
-                if(result==undefined){
-                    Pt=[];
+                if(result.length>0){
+                    Pt=result;
+                    for(let i=0;i<result.length;i++){
+                        Pt_DOFi[i]=result[i].date_of_filings;
+                        Pt_DOF[i]=Pt_DOFi[i].toISOString().split("T")[0];
+                        Pt_DOPi[i]=result[i].daye_of_publication;
+                        Pt_DOP[i]=Pt_DOPi[i].toISOString().split("T")[0];
+                        Pt_inventor[i]=result[i].inventer;
+                        Pt_number[i]=result[i].patent_number;
+                        Pt_status[i]=result[i].status;
+                        Pt_title[i]=result[i].title;
+                    }
                 }
                 else{
-                    Pt=result;
+                    Pt=[];
                 }
                 resolve();
             });
@@ -623,7 +646,9 @@ app.get("/form4",function(req,res){
 
 
 app.get("/form4f",function(req,res){
-    res.render("form4",{AppNo:AppNo,Username:Username,Pb:Pb,Ps:Ps,Pt:Pt});
+    res.render("form4",{AppNo:AppNo,Username:Username,Pb:Pb,Ps:Ps,Pt:Pt,nij:nij,nic:nic,nnj:nnj,nnc:nnc,n_p:n_p,n_b,n_b,Pb_YOP:Pb_YOP,Pb_author:Pb_author,
+        Pb_docid:Pb_docid,Pb_title:Pb_title,Pb_type:Pb_type,Pt_DOF:Pt_DOF,Pt_DOP:Pt_DOP,Pt_inventor:Pt_inventor,Pt_number:Pt_number,Pt_status:Pt_status,Pt_title:Pt_title
+    });
 });
 
 app.post("/form4f",function(req,res){
@@ -654,19 +679,33 @@ app.post("/form4f",function(req,res){
     query = 'DELETE FROM patents WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){});
     let cnt2=0;
+    // console.log(Pt_inventor);
     if(Pt_inventor !== undefined) cnt2 = Pt_inventor.length;
-    for(let i=0; i<cnt2;i++){
-        query = 'INSERT INTO patents VALUES ("'+AppNo+'","'+Pt_inventor[i]+'","'+Pt_title[i]+'","'+Pt_DOF[i]+'","'+Pt_DOP[i]+'","'+Pt_number[i]+'","'+Pt_status[i]+'");';
+    if(typeof(Pt_inventor)=='string'){
+        query = 'INSERT INTO patents VALUES ("'+AppNo+'","'+Pt_inventor+'","'+Pt_title+'","'+Pt_DOF+'","'+Pt_DOP+'","'+Pt_number+'","'+Pt_status+'");';
         db.query(query,function(err,result,field){});
     }
+    else{
+        for(let i=0; i<cnt2;i++){
+            query = 'INSERT INTO patents VALUES ("'+AppNo+'","'+Pt_inventor[i]+'","'+Pt_title[i]+'","'+Pt_DOF[i]+'","'+Pt_DOP[i]+'","'+Pt_number[i]+'","'+Pt_status[i]+'");';
+            db.query(query,function(err,result,field){});
+        }
+    }
+    
     query = 'DELETE FROM publications WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){});
     let cnt3=0;
     if(Pb_type !== undefined) cnt3 = Pb_type.length;
-    for(let i=0; i<cnt3;i++){
-        query = 'INSERT INTO publications VALUES ("'+AppNo+'","'+Pb_type[i]+'","'+Pb_author[i]+'","'+Pb_title[i]+'","'+Pb_YOP[i]+'","'+Pb_docid[i]+'");';
+    if(typeof(Pb_type)=='string'){
+        query = 'INSERT INTO publications VALUES ("'+AppNo+'","'+Pb_type+'","'+Pb_author+'","'+Pb_title+'","'+Pb_YOP+'","'+Pb_docid+'");';
         db.query(query,function(err,result,field){});
+    }else{
+        for(let i=0; i<cnt3;i++){
+            query = 'INSERT INTO publications VALUES ("'+AppNo+'","'+Pb_type[i]+'","'+Pb_author[i]+'","'+Pb_title[i]+'","'+Pb_YOP[i]+'","'+Pb_docid[i]+'");';
+            db.query(query,function(err,result,field){});
+        }
     }
+    
     
     res.redirect("/form5");
 });
