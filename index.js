@@ -61,7 +61,8 @@ Rso_Name=[],Rso_Status=[],Rso,
 res_con,tea_con,pro_ser,por_add,
 nij,nic,nnj,nnc,n_p,n_b,Ps={inter_journals:4},
 Pt,Pt_inventor,Pt_title,Pt_DOF,Pt_DOP,Pt_number,Pt_status,
-Pb,Pb_type,Pb_title,Pb_type,Pb_author,Pb_YOP,Pb_docid
+Pb,Pb_type,Pb_title,Pb_type,Pb_author,Pb_YOP,Pb_docid,
+d_phd,d_pg,d_ug,d_12,d_10,d_add
 ;
 
 
