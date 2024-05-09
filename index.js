@@ -29,7 +29,7 @@ const db = mysql.createConnection({
     host: 'localhost',
     database: 'faculty_recruitment',
     user: 'root',
-    password: 'Pass@123'
+    password: 'harsh1980'
 });
 
 db.connect(function(error){
@@ -776,6 +776,33 @@ app.post("/form6",upload.fields([{name: 'd_pro'},{name: 'd_sig'},{name : 'd_phd'
 app.get("/form7",function(req,res){
     res.render("form7",{AppNo:AppNo,Username:Username});
 });
+app.post("/form7",function(req,res){
+    res.redirect("/pdf");
+});
+
+
+// <----------------------------------------------------------------->
+app.get("/pdf",function(req,res){
+    res.render("pdf",{Username:Username,AppNo:AppNo,F_Name : F_Name,M_Name:M_Name,L_Name:L_Name,DOB:DOB,Gender:Gender,Nationality:Nationality,ID_type:ID_type,
+        ID_no:ID_no,Category:Category,Email:Email,Mobile_no:Mobile_no,Add_l1:Add_l1,Add_l2:Add_l2,City:City,State:State,Pincode:Pincode,Department:Department,Position:Position,
+        phd_uni:phd_uni,phd_Dept:phd_Dept,phd_sn:phd_sn,phd_dos:phd_dos,phd_yoj:phd_yoj,phd_title:phd_title,
+        pg_uni:pg_uni,pg_deg:pg_deg,pg_bra:pg_bra,pg_yoj:pg_yoj,pg_yoc:pg_yoc,pg_dur:pg_dur,pg_per:pg_per,pg_div:pg_div,
+        ug_uni:ug_uni,ug_deg:ug_deg,ug_bra:ug_bra,ug_yoj:ug_yoj,ug_yoc:ug_yoc,ug_dur:ug_dur,ug_per:ug_per,ug_div:ug_div,
+        add_uni:add_uni,add_deg:add_deg,add_bra:add_bra,add_yoj:add_yoj,add_yoc:add_yoc,add_dur:add_dur,add_per:add_per,add_div:add_div,cnt_ae:cnt_ae,
+        EmpHis:EmpHis,ResSup:ResSup,Aw:Aw,Rso:Rso,Eh_Position:Eh_Position,Eh_Organisation:Eh_Organisation,Eh_DOJ:Eh_DOL,Eh_DOL:Eh_DOL,
+        Rs_Name:Rs_Name,Rs_DOC:Rs_DOC,Rs_DOS:Rs_DOS,Rs_Degree:Rs_Degree,Rs_Status:Rs_Degree,Rs_Status:Rs_Status,Rs_Title:Rs_Title,Aw_Name:Aw_Name,Aw_Presentor:Aw_Presentor,Aw_Year:Aw_Year,Rso_Name:Rso_Name,Rso_Status:Rso_Status,
+        AppNo:AppNo,Username:Username,Pb:Pb,Ps:Ps,Pt:Pt,nij:nij,nic:nic,nnj:nnj,nnc:nnc,n_p:n_p,n_b,n_b,Pb_YOP:Pb_YOP,Pb_author:Pb_author,
+        Pb_docid:Pb_docid,Pb_title:Pb_title,Pb_type:Pb_type,Pt_DOF:Pt_DOF,Pt_DOP:Pt_DOP,Pt_inventor:Pt_inventor,Pt_number:Pt_number,Pt_status:Pt_status,Pt_title:Pt_title
+    
+    
+    });
+});
+
+app.post("/pdf",function(req,res){
+    res.redirect("/")
+});
+
+
 
 //<---------------------------------------------------------------------------------------------->
 app.listen(3000, () => {
