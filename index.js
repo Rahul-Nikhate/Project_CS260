@@ -29,7 +29,7 @@ const db = mysql.createConnection({
     host: 'localhost',
     database: 'faculty_recruitment',
     user: 'root',
-    password: 'Pass@123'
+    password: 'harsh1980'
 });
 
 db.connect(function(error){
@@ -62,7 +62,7 @@ res_con,tea_con,pro_ser,por_add,
 nij,nic,nnj,nnc,n_p,n_b,Ps={inter_journals:4},
 Pt,Pt_inventor,Pt_title,Pt_DOF,Pt_DOP,Pt_number,Pt_status,
 Pb,Pb_type,Pb_title,Pb_type,Pb_author,Pb_YOP,Pb_docid,
-d_phd,d_pg,d_ug,d_12,d_10,d_add
+d_phd,d_pg,d_ug,d_12,d_10,d_add,d_pro,d_sig
 ;
 
 
@@ -669,7 +669,7 @@ app.post("/form4f",function(req,res){
     res.redirect("/form5");
 });
 
-// ------------------------------------------------------------------------
+// --------------------------------------------------------9----------------
 
 //Form Page 5 <------------------------------------------------------------------->
 
@@ -720,7 +720,7 @@ app.get("/form6",function(req,res){
     res.render("form6",{AppNo:AppNo,Username:Username});
 });
 
-app.post("/form6",upload.fields([{name : d_phd},{name : d_pg},{name : d_ug},{name : d_12},{name : d_10},{name : d_add}]),function(req,res){
+app.post("/form6",upload.fields([{name: d_pro},{name: d_sig},{name : d_phd},{name : d_pg},{name : d_ug},{name : d_12},{name : d_10},{name : d_add}]),function(req,res){
     let snn = req.body.snn;
     if(snn == "snn"){
         res.redirect("/form7");

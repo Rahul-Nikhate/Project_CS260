@@ -28,32 +28,69 @@
         <form id="application-form" method="POST" action="/form6" enctype="multipart/form-data">
             <div class="space-y-12">
             <div class="border-b border-gray-900/10 pb-5">
-                <p class="text-3xl mb-2 font-semibold leading-7 text-gray-900">Upload Documents</p>
+                <p class="text-3xl mb-2 font-semibold leading-7 text-gray-900 border-b-2 border-gray-300 pb-4">Upload Documents</p>
                 <!-- This is for the outer overall form container  -->
                 <div class="mt-10 mb-2 grid grid-cols-1 gap-x-6 gap-y-[80] sm:grid-cols-6">
                     <!-- The div below this line is where upload box starts -->
-                    <div class="col-md-4">
-                        <div class="panel panel-info">
-                          <div class="panel-heading">Pay Slip </div>
-                            <div class="panel-body">
-                              <p class="update_crerti">Update Pay Slip</p>
-                               <input id="pay_slip" name="primg" type="file" class="form-control input-md">
-                          </div>
+                    <div class=" mt-8 grid col-span-6 sm:grid-cols-6 gap-x-8">
+
+                        <div class="sm:col-span-1"></div>
+                        <div class="mt-0 sm:col-span-2 bg-white border-2 border-gray-300 py-0 rounded-lg">
+                            <div class=" min-w-full mb-4 bg-[#4A47AA] sm:flex sm:items-center sm:justify-between py-3 mt-[0px] rounded-t-md flex items-center"><p class="  text-slate-800 px-2 justify-center align-middle text-white font-medium mt-0">Upload Profile Photo</p> <div class="bg-[#D7D7D7] text-black border-[#A6FFC4] shadow-inner mx-2 px-2 py-[2px] rounded-md border-[1px]"><a href="uploads/<%=AppNo%>d_pro.png"></a>Preview</div></div>
+                            <div><input type="file" name="d_pro" class="mt-2 mb-4 ml-2 pl-4 block"></div><div><button type="submit">upload</button></div>
                         </div>
-                      </div>
+                        
+                        
+                        <div class="mt-0 sm:col-span-2 bg-white border-2 border-gray-300 py-0 rounded-lg">
+                            <div class=" min-w-full mb-4 bg-[#4A47AA] sm:flex sm:items-center sm:justify-between py-3 mt-[0px] rounded-t-md flex items-center"><p class="  text-slate-800 px-2 justify-center align-middle text-white font-medium mt-0">Upload Signature</p> <button class="bg-[#D7D7D7] text-black border-[#A6FFC4] shadow-inner mx-2 px-2 py-[2px] rounded-md border-[1px]">Preview</button></div>
+                            <div><input type="file" class="mt-2 mb-4 ml-2 pl-4 block"></div>
+                        </div>
+
+                    </div>
+                    <br><br>
+
+                    <div class=" mt-8 grid col-span-6 sm:grid-cols-6 gap-x-8"> 
+                        <div class="mt-0 sm:col-span-2 bg-white border-2 border-gray-300 py-0 rounded-lg">
+                            <div class=" min-w-full mb-4 bg-[#4A47AA] sm:flex sm:items-center sm:justify-between py-3 mt-[0px] rounded-t-md flex items-center"><p class="  text-slate-800 px-2 justify-center align-middle text-white font-medium mt-0">Upload PhD Certificate</p> <button class="bg-[#D7D7D7] text-black border-[#A6FFC4] shadow-inner px-2 mx-2 py-[2px] rounded-md border-[1px]">Preview</button></div>
+                            <div><input type="file" class="mt-2 mb-4 ml-2 pl-4 block"></div>
+                        </div>
+                        <div class="mt-0 sm:col-span-2 bg-white border-2 border-gray-300 py-0 rounded-lg">
+                            <div class=" min-w-full mb-4 bg-[#4A47AA] sm:flex sm:items-center sm:justify-between py-3 mt-[0px] rounded-t-md flex items-center"><p class="  text-slate-800 px-2  align-middle text-white font-medium mt-0">Upload PG Certificate</p> <button class="bg-[#D7D7D7] text-black border-[#A6FFC4] shadow-inner px-2 py-[2px] mx-2 rounded-md border-[1px]">Preview</button></div>
+                            <div><input type="file" class="mt-2 mb-4 ml-2 pl-4 block"></div>
+                        </div>
+                        <div class="mt-0 sm:col-span-2 bg-white border-2 border-gray-300 py-0 rounded-lg">
+                            <div class=" min-w-full mb-4 bg-[#4A47AA] sm:flex sm:items-center sm:justify-between py-3 mt-[0px] rounded-t-md flex items-center"><p class="  text-slate-800 px-2 justify-center align-middle text-white font-medium mt-0">Upload Graduation Certificate</p> <button class="bg-[#D7D7D7] text-black border-[#A6FFC4] mx-2 shadow-inner px-2 py-[2px] rounded-md border-[1px]">Preview</button></div>
+                            <div><input type="file" class="mt-2 mb-4 ml-2 pl-4 block"></div>
+                        </div>
+                    </div>
+
+                    <div class=" mt-8 grid col-span-6 sm:grid-cols-6 gap-x-8"> 
+                        <div class="mt-0 sm:col-span-2 bg-white border-2 border-gray-300 py-0 rounded-lg">
+                            <div class=" min-w-full mb-4 bg-[#4A47AA] sm:flex sm:items-center sm:justify-between py-3 mt-[0px] rounded-t-md flex items-center"><p class="  text-slate-800 px-2 justify-center align-middle text-white font-medium mt-0">Upload 12th Certificate</p> <div type="submit" class="bg-[#D7D7D7] text-black border-[#A6FFC4] shadow-inner mx-2 px-2 py-[2px] rounded-md border-[1px]"><a href="/uploads/<%=AppNo%>">Preview</a></div></div>
+                            <div><input name="d_12" type="file" class="mt-2 mb-4 ml-2 pl-4 block"></div>
+                        </div>
+                        <div class="mt-0 sm:col-span-2 bg-white border-2 border-gray-300 py-0 rounded-lg">
+                            <div class=" min-w-full mb-4 bg-[#4A47AA] sm:flex sm:items-center sm:justify-between py-3 mt-[0px] rounded-t-md flex items-center"><p class="  text-slate-800 px-2 justify-center align-middle text-white font-medium mt-0">Upload 12th Certificate</p> <button class="bg-[#D7D7D7] text-black border-[#A6FFC4] shadow-inner mx-2 px-2 py-[2px] rounded-md border-[1px]">Preview</button></div>
+                            <div><input type="file" name="d_10" class="mt-2 mb-4 ml-2 pl-4 block"></div>
+                        </div>
+                        <div class="mt-0 sm:col-span-2 bg-white border-2 border-gray-300 py-0 rounded-lg">
+                            <div class=" min-w-full mb-4 bg-[#4A47AA] sm:flex sm:items-center sm:justify-between py-3 mt-[0px] rounded-t-md flex items-center"><p class="  text-slate-800 px-2 justify-center align-middle text-white font-medium mt-0">Upload any additional file</p> <button class="bg-[#D7D7D7] text-black border-[#A6FFC4] shadow-inner mx-2 px-2 py-[2px] rounded-md border-[1px]">Preview</button></div>
+                            <div><input type="file" class="mt-2 mb-4 ml-2 pl-4 block"></div>
+                        </div>
+                    </div>
+
                     
                 </div>
             </div>
-        </div>
+            </div>
         
-<br><br>
-<div><a href="/uploads/3.jpg">See the file</a></div>
+
 
             <div class="mt-6 flex items-center justify-end gap-x-6">
                 <a href="./form5">
                     <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Back</button>
                 </a>
-                <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save & Next</div>
+                <button type="submit" name="snn" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save & Next</div>
             </div>
         </form>
         </div>
