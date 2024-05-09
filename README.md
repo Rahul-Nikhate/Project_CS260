@@ -1,7 +1,9 @@
 # Project_CS260
 Faculty Recruitment Portal
 
-To Run : 1.npm install
+To Run : 
+
+         1.npm install
 
          2.npm run start
 
