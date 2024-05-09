@@ -55,22 +55,22 @@
                                 <div  class="field-set grid sm:col-span-7 sm:grid-cols-7 gap-x-6 gap-y-1 px-0 py-0">
                                 <div class="sm:col-span-2 sm:col-start-1">
                                     <div class="mt-2">
-                                    <input type="text" name="Eh_Position[]" value="<%= EmpHis[i].Position %>" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                    <input type="text" name="Eh_Position" value="<%= Eh_Position[i] %>" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                     </div>
                                 </div>
                                 <div class="sm:col-span-2">
                                     <div class="mt-2">
-                                    <input type="text" name="Eh_Organisation[]" value="<%= EmpHis[i].Organisation %>"  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                    <input type="text" name="Eh_Organisation" value="<%= Eh_Organisation[i] %>"  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                     </div>
                                 </div>
                                 <div class="sm:col-span-1">
                                     <div class="mt-2">
-                                    <input type="date" name="Eh_DOJ[]" value='<%= EmpHis[i].Date_Of_Joining.toISOString().split("T")[0] %>'  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                    <input type="date" name="Eh_DOJ" value='<%= Eh_DOJ[i] %>'  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                     </div>
                                 </div>
                                 <div class="sm:col-span-1">
                                     <div class="mt-2">
-                                    <input type="date" name="Eh_DOL[]" value='<%= EmpHis[i].Date_Of_Leaving.toISOString().split("T")[0] %>'  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                    <input type="date" name="Eh_DOL" value='<%= Eh_DOL[i] %>'  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                     </div>
                                 </div>
                                 <div class="sm:col-span-1">
@@ -87,22 +87,22 @@
                               newFieldSet.innerHTML = `
                               <div class="sm:col-span-2 sm:col-start-1">
                                     <div class="mt-2">
-                                    <input type="text" name="Eh_Position[]" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                    <input type="text" name="Eh_Position" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                     </div>
                                 </div>
                                 <div class="sm:col-span-2">
                                     <div class="mt-2">
-                                    <input type="text" name="Eh_Organisation[]" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                    <input type="text" name="Eh_Organisation" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                     </div>
                                 </div>
                                 <div class="sm:col-span-1">
                                     <div class="mt-2">
-                                    <input type="date" name="Eh_DOJ[]" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                    <input type="date" name="Eh_DOJ" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                     </div>
                                 </div>
                                 <div class="sm:col-span-1">
                                     <div class="mt-2">
-                                    <input type="date" name="Eh_DOL[]" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                    <input type="date" name="Eh_DOL" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                     </div>
                                 </div>
                                 <div class="sm:col-span-1">
@@ -150,32 +150,32 @@
                             <div  class="field-set grid sm:col-span-7 sm:grid-cols-9 gap-x-3 gap-y-1 px-0 py-0">
                             <div class="sm:col-span-2 sm:col-start-1">
                                 <div class="mt-2">
-                                <input type="text" name="Rs_Name[]" value="<%= ResSup[i].name_of_student %>" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input type="text" name="Rs_Name" value="<%= Rs_Name[i] %>" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                 </div>
                             </div>
                             <div class="sm:col-span-2">
                                 <div class="mt-2">
-                                <input type="text" name="Rs_Degree[]" value="<%= ResSup[i].student_degree %>"  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input type="text" name="Rs_Degree" value="<%= Rs_Degree[i] %>"  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                 </div>
                             </div>
                             <div class="sm:col-span-1">
                                 <div class="mt-2">
-                                <input type="text" name="Rs_Title[]" value='<%= ResSup[i].title %>'  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input type="text" name="Rs_Title" value='<%= Rs_Title[i] %>'  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                 </div>
                             </div>
                             <div class="sm:col-span-1">
                                 <div class="mt-2">
-                                <input type="text" name="Rs_Status[]" value='<%= ResSup[i].status %>'  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input type="text" name="Rs_Status" value='<%= Rs_Status[i] %>'  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                 </div>
                             </div>
                             <div class="sm:col-span-1">
                                 <div class="mt-2">
-                                <input type="text" name="Rs_DOS[]" value='<%= ResSup[i].starting_year %>'  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input type="text" name="Rs_DOS" value='<%= Rs_DOS[i] %>'  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                 </div>
                             </div>
                             <div class="sm:col-span-1">
                                 <div class="mt-2">
-                                <input type="text" name="Rs_DOC[]" value='<%= ResSup[i].completion_year %>'  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input type="text" name="Rs_DOC" value='<%= Rs_DOC[i] %>'  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                 </div>
                             </div>
                             <div class="sm:col-span-1">
@@ -192,32 +192,32 @@
                             newFieldSet.innerHTML = `
                             <div class="sm:col-span-2 sm:col-start-1">
                                     <div class="mt-2">
-                                    <input type="text" name="Rs_Name[]" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                    <input type="text" name="Rs_Name" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                     </div>
                                 </div>
                                 <div class="sm:col-span-2">
                                     <div class="mt-2">
-                                    <input type="text" name="Rs_Degree[]"  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                    <input type="text" name="Rs_Degree"  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                     </div>
                                 </div>
                                 <div class="sm:col-span-1">
                                     <div class="mt-2">
-                                    <input type="text" name="Rs_Title[]"  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                    <input type="text" name="Rs_Title"  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                     </div>
                                 </div>
                                 <div class="sm:col-span-1">
                                     <div class="mt-2">
-                                    <input type="text" name="Rs_Status[]" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                    <input type="text" name="Rs_Status" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                     </div>
                                 </div>
                                 <div class="sm:col-span-1">
                                     <div class="mt-2">
-                                    <input type="text" name="Rs_DOS[]" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                    <input type="text" name="Rs_DOS" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                     </div>
                                 </div>
                                 <div class="sm:col-span-1">
                                     <div class="mt-2">
-                                    <input type="text" name="Rs_DOC[]"  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                    <input type="text" name="Rs_DOC"  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                     </div>
                                 </div>
                                 <div class="sm:col-span-1">
@@ -256,17 +256,17 @@
                             <div  class="field-set grid sm:col-span-7 sm:grid-cols-9 gap-x-3 gap-y-1 px-0 py-0">
                             <div class="sm:col-span-3 sm:col-start-1">
                                 <div class="mt-2">
-                                <input type="text" name="Aw_Name[]" value="<%= Aw[i].Award_Name %>" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input type="text" name="Aw_Name" value="<%= Aw[i].Award_Name %>" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                 </div>
                             </div>
                             <div class="sm:col-span-3">
                                 <div class="mt-2">
-                                <input type="text" name="Aw_Presentor[]" value="<%= Aw[i].Presenter %>"  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input type="text" name="Aw_Presentor" value="<%= Aw[i].Presenter %>"  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                 </div>
                             </div>
                             <div class="sm:col-span-2">
                                 <div class="mt-2">
-                                <input type="text" name="Aw_Year[]" value='<%= Aw[i].Year %>'  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input type="text" name="Aw_Year" value='<%= Aw[i].Year %>'  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                 </div>
                             </div>
                             <div class="sm:col-span-1">
@@ -283,17 +283,17 @@
                             newFieldSet.innerHTML = `
                             <div class="sm:col-span-3 sm:col-start-1">
                                 <div class="mt-2">
-                                <input type="text" name="Aw_Name[]" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input type="text" name="Aw_Name" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                 </div>
                             </div>
                             <div class="sm:col-span-3">
                                 <div class="mt-2">
-                                <input type="text" name="Aw_Presentor[]" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input type="text" name="Aw_Presentor" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                 </div>
                             </div>
                             <div class="sm:col-span-2">
                                 <div class="mt-2">
-                                <input type="text" name="Aw_Year[]" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input type="text" name="Aw_Year" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                 </div>
                             </div>
                             <div class="sm:col-span-1">
@@ -329,12 +329,12 @@
                             <div  class="field-set grid sm:col-span-7 sm:grid-cols-9 gap-x-3 gap-y-1 px-0 py-0">
                             <div class="sm:col-span-5 sm:col-start-1">
                                 <div class="mt-2">
-                                <input type="text" name="Rso_Name[]" value="<%= Rso[i].name %>" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input type="text" name="Rso_Name" value="<%= Rso[i].name %>" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                 </div>
                             </div>
                             <div class="sm:col-span-3">
                                 <div class="mt-2">
-                                <input type="text" name="Rso_Status[]" value="<%= Rso[i].membership_status %>"  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input type="text" name="Rso_Status" value="<%= Rso[i].membership_status %>"  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                 </div>
                             </div>
                             <div class="sm:col-span-1">
@@ -351,12 +351,12 @@
                             newFieldSet.innerHTML = `
                             <div class="sm:col-span-5 sm:col-start-1">
                                 <div class="mt-2">
-                                <input type="text" name="Rso_Name[]" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input type="text" name="Rso_Name" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                 </div>
                             </div>
                             <div class="sm:col-span-3">
                                 <div class="mt-2">
-                                <input type="text" name="Rso_Status[]" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input type="text" name="Rso_Status" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                 </div>
                             </div>
                             <div class="sm:col-span-1">

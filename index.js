@@ -11,7 +11,7 @@ const db = mysql.createConnection({
     host: 'localhost',
     database: 'faculty_recruitment',
     user: 'root',
-    password: 'Pass@123'
+    password: 'harsh1980'
 });
 
 db.connect(function(error){
@@ -36,15 +36,16 @@ phd_uni,phd_Dept,phd_sn,phd_dos,phd_yoj,phd_title,
 pg_uni,pg_deg,pg_bra,pg_yoj,pg_yoc,pg_dur,pg_per,pg_div,
 ug_uni,ug_deg,ug_bra,ug_yoj,ug_yoc,ug_dur,ug_per,ug_div,
 add_uni=[],add_deg=[],add_bra=[],add_yoj=[],add_yoc=[],add_dur=[],add_per=[],add_div=[],cnt_ae = 0,
-Eh_Position=[],Eh_Organisation,Eh_DOJ,Eh_DOL,EmpHis,
-Rs_Name=[],Rs_Degree,Rs_Title,Rs_Status,Rs_DOS,Rs_DOC,ResSup,
-Aw_Name=[],Aw_Presentor,Aw_Year,Aw,
-Rso_Name=[],Rso_Status,Rso,
+Eh_Position=[],Eh_Organisation=[],Eh_DOJ=[],Eh_DOL=[],EmpHis=[],
+Rs_Name=[],Rs_Degree=[],Rs_Title=[],Rs_Status=[],Rs_DOS=[],Rs_DOC=[],ResSup,
+Aw_Name=[],Aw_Presentor=[],Aw_Year=[],Aw,
+Rso_Name=[],Rso_Status=[],Rso,
 res_con,tea_con,pro_ser,por_add,
-nij,nic,nnj,nnc,n_p,n_b,Ps,
-Pt,
-Pb
+nij,nic,nnj,nnc,n_p,n_b,Ps={inter_journals:4},
+Pt,Pt_inventor,Pt_title,Pt_DOF,Pt_DOP,Pt_number,Pt_status,
+Pb,Pb_type,Pb_title,Pb_type,Pb_author,Pb_YOP,Pb_docid
 ;
+
 
 //Sign IN Page <----------------------------------------------------------------------------->
 
@@ -184,9 +185,13 @@ app.post("/form1f",function(req,res){
     Position = req.body.Position;
     query = 'DELETE FROM personal_info WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){});
+
+
     query = 'INSERT INTO personal_info VALUES ("'+ AppNo + '","'  + F_Name + '","' + M_Name + '","' + L_Name + '","' + DOB + '","' + Gender + '","' + 
             Nationality + '","' + ID_type + '","' + ID_no + '","' + Category + '","' + Email + '","' + Mobile_no + '","' + Add_l1 + '","' + Add_l2 + '","' + City + '","' + State + '","' + Pincode + '");';
     db.query(query,function(err,result,field){});
+
+
     query= 'UPDATE applications SET Department = "'+Department+'", Post = "'+Position+'" WHERE Application_Number = "'+AppNo+'";';
     db.query(query,function(err,result,field){
     });
@@ -341,12 +346,19 @@ app.post("/form2f",function(req,res){
     // console.log(add_uni.length);
     let nf = 0;
     if(add_uni !== undefined) nf = add_uni.length;
-    for(let i = 0;i<nf;i++){
-
-        query = 'INSERT INTO edu_add VALUES ("'+AppNo +'","'+ add_uni[i] +'","'+ add_deg[i] +'","'+ add_bra[i] +'","'+ add_yoj[i] +'","'+ add_yoc[i] +'","'+ add_dur[i] +'","'+ add_per[i] +'","'+ add_div[i]+'");';
+    if(typeof(add_uni)=='string'){
+        query = 'INSERT INTO edu_add VALUES ("'+AppNo +'","'+ add_uni +'","'+ add_deg +'","'+ add_bra +'","'+ add_yoj +'","'+ add_yoc +'","'+ add_dur +'","'+ add_per +'","'+ add_div+'");';
         db.query(query,function(err,result,field){});
-
     }
+    else{
+        for(let i = 0;i<nf;i++){
+
+            query = 'INSERT INTO edu_add VALUES ("'+AppNo +'","'+ add_uni[i] +'","'+ add_deg[i] +'","'+ add_bra[i] +'","'+ add_yoj[i] +'","'+ add_yoc[i] +'","'+ add_dur[i] +'","'+ add_per[i] +'","'+ add_div[i]+'");';
+            db.query(query,function(err,result,field){});
+
+        }
+    }
+    
     
 
     res.redirect("/form3");
@@ -360,23 +372,41 @@ app.get("/form3",function(req,res){
         new Promise((resolve, reject) => {
             query = 'SELECT * FROM employment_history WHERE Application_Number = "' + AppNo + '";';
             db.query(query,function(err,result,field){
-                if(result==undefined){
-                    EmpHis=[];
+                if(result.length>0){
+                    EmpHis=result;
+                    for(let i=0;i<result.length;i++){
+                        Eh_Position[i]=result[i].Position;
+                        Eh_Organisation[i]=result[i].Organisation;
+                        Eh_DOJ[i]=result[i].Date_Of_Joining;
+                        Eh_DOJ[i]=Eh_DOJ[i].toISOString().split("T")[0];
+                        Eh_DOL[i]=result[i].Date_Of_Leaving;
+                        Eh_DOL[i]=Eh_DOL[i].toISOString().split("T")[0];
+                    }
+                    
+                    
                 }
                 else{
-                    EmpHis=result;
-                }
+                    EmpHis=[];
+                }console.log(EmpHis,Eh_Position,Eh_Organisation,Eh_DOJ,Eh_DOL);
                 resolve();
             });
         }),
         new Promise((resolve, reject) => {
             query = 'SELECT * FROM research_supervision WHERE Application_Number = "' + AppNo + '";';
             db.query(query,function(err,result,field){
-                if(result==undefined){
-                    ResSup=[];
+                if(result.length>0){
+                    ResSup=result;
+                    for(let i=0;i<result.length;i++){
+                    Rs_Name[i]=result[i].name_of_student;
+                    Rs_Degree[i]=result[i].student_degree;
+                    Rs_Title[i]=result[i].title;
+                    Rs_Status[i]=result[i].status;
+                    Rs_DOS[i]=result[i].starting_year;
+                    Rs_DOC[i]=result[i].completion_year;
+                    }
                 }
                 else{
-                    ResSup=result;
+                    ResSup=[];
                 }
                 resolve();
             });
@@ -384,11 +414,16 @@ app.get("/form3",function(req,res){
         new Promise((resolve, reject) => {
             query = 'SELECT * FROM awards WHERE Application_Number = "' + AppNo + '";';
             db.query(query,function(err,result,field){
-                if(result==undefined){
-                    Aw=[];
+                if(result.length>0){
+                    Aw=result;
+                    for(let i=0;i<result.length;i++){
+                    Aw_Name[i]=result[i].Award_Name;
+                    Aw_Presentor[i]=result[i].Presenter;
+                    Aw_Year[i]=result[i].Year;
+                    }
                 }
                 else{
-                    Aw=result;
+                    Aw=[];
                 }
                 resolve();
             });
@@ -397,7 +432,11 @@ app.get("/form3",function(req,res){
             query = 'SELECT * FROM professional_society WHERE Application_Number = "' + AppNo + '";';
             db.query(query,function(err,result,field){
                 if(result==undefined){
-                    Rso=[];
+                    Rso=result;
+                    for(let i=0;i<result.length;i++){
+                    Rso_Name[i]=result[i].name;
+                    Rso_Status[i]=result[i].membership_status;
+                    }
                 }
                 else{
                     Rso=result;
@@ -412,7 +451,9 @@ app.get("/form3",function(req,res){
 
 
 app.get("/form3f",function(req,res){
-    res.render("form3",{AppNo:AppNo,Username:Username,EmpHis:EmpHis,ResSup:ResSup,Aw:Aw,Rso:Rso});
+    res.render("form3",{AppNo:AppNo,Username:Username,EmpHis:EmpHis,ResSup:ResSup,Aw:Aw,Rso:Rso,Eh_Position:Eh_Position,Eh_Organisation:Eh_Organisation,Eh_DOJ:Eh_DOL,Eh_DOL:Eh_DOL,
+        Rs_Name:Rs_Name,Rs_DOC:Rs_DOC,Rs_DOS:Rs_DOS,Rs_Degree:Rs_Degree,Rs_Status:Rs_Degree,Rs_Status:Rs_Status,Rs_Title:Rs_Title,Aw_Name:Aw_Name,Aw_Presentor:Aw_Presentor,Aw_Year:Aw_Year,Rso_Name:Rso_Name,Rso_Status:Rso_Status
+    });
 });
 
 app.post("/form3f",function(req,res){
@@ -433,39 +474,70 @@ app.post("/form3f",function(req,res){
     Rso_Status =req.body.Rso_Status;
     query = 'DELETE FROM employment_history WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){});
-
     let cnt = 0;
     if(Eh_Position !== undefined) cnt = Eh_Position.length;
-    for(let i=0; i<cnt;i++){
-        query = 'INSERT INTO employment_history VALUES ("'+AppNo+'","'+Eh_Position[i]+'","'+Eh_Organisation[i]+'","'+Eh_DOJ[i]+'","'+Eh_DOL[i]+'");';
+    console.log(Eh_Position, Eh_Organisation,Eh_DOJ,Eh_DOL);
+    if(typeof(Eh_Position)=='string'){
+        query = 'INSERT INTO employment_history VALUES ("'+AppNo+'","'+Eh_Position+'","'+Eh_Organisation+'","'+Eh_DOJ+'","'+Eh_DOL+'");';
         db.query(query,function(err,result,field){});
     }
+    else{
+        for(let i=0; i<cnt;i++){
+            query = 'INSERT INTO employment_history VALUES ("'+AppNo+'","'+Eh_Position[i]+'","'+Eh_Organisation[i]+'","'+Eh_DOJ[i]+'","'+Eh_DOL[i]+'");';
+            db.query(query,function(err,result,field){});
+        }
+    };
+    
 
     
     query = 'DELETE FROM research_supervision WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){});
     let cnt2=0;
     if(Rs_Name !== undefined) cnt2 = Rs_Name.length;
-    for(let i=0; i<cnt2;i++){
-        query = 'INSERT INTO research_supervision VALUES ("'+AppNo+'","'+Rs_Name[i]+'","'+Rs_Degree[i]+'","'+Rs_Title[i]+'","'+Rs_Status[i]+'","'+Rs_DOS[i]+'","'+Rs_DOC[i]+'");';
+    console.log(Rs_Name,Rs_Degree,Rs_DOC);
+    if(typeof(Rs_Name)=='string'){
+        query = 'INSERT INTO research_supervision VALUES ("'+AppNo+'","'+Rs_Name+'","'+Rs_Degree+'","'+Rs_Title+'","'+Rs_Status+'","'+Rs_DOS+'","'+Rs_DOC+'");';
         db.query(query,function(err,result,field){});
     }
+    else{
+        for(let i=0; i<cnt2;i++){
+            query = 'INSERT INTO research_supervision VALUES ("'+AppNo+'","'+Rs_Name[i]+'","'+Rs_Degree[i]+'","'+Rs_Title[i]+'","'+Rs_Status[i]+'","'+Rs_DOS[i]+'","'+Rs_DOC[i]+'");';
+            db.query(query,function(err,result,field){});
+        }
+    }
+    
     query = 'DELETE FROM awards WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){});
     let cnt3=0;
     if(Aw_Name !== undefined) cnt3 = Aw_Name.length;
-    for(let i=0; i<cnt3;i++){
-        query = 'INSERT INTO awards VALUES ("'+AppNo+'","'+Aw_Name[i]+'","'+Aw_Presentor[i]+'","'+Aw_Year[i]+'");';
+    if(typeof(Aw_Name)=='string'){
+        query = 'INSERT INTO awards VALUES ("'+AppNo+'","'+Aw_Name+'","'+Aw_Presentor+'","'+Aw_Year+'");';
         db.query(query,function(err,result,field){});
     }
+    else{
+        for(let i=0; i<cnt3;i++){
+            query = 'INSERT INTO awards VALUES ("'+AppNo+'","'+Aw_Name[i]+'","'+Aw_Presentor[i]+'","'+Aw_Year[i]+'");';
+            db.query(query,function(err,result,field){});
+        }
+    };
+
+
+
     query = 'DELETE FROM professional_society WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){});
     let cnt4=0;
     if(Rso_Name !== undefined) cnt4 = Rso_Name.length;
-    for(let i=0; i<cnt4;i++){
-        query = 'INSERT INTO professional_society VALUES ("'+AppNo+'","'+Rso_Name[i]+'","'+Rso_Status[i]+'");';
+    if(typeof(Rs_Name)=='string'){
+        query = 'INSERT INTO professional_society VALUES ("'+AppNo+'","'+Rso_Name+'","'+Rso_Status+'");';
         db.query(query,function(err,result,field){});
     }
+    else{
+        for(let i=0; i<cnt4;i++){
+            query = 'INSERT INTO professional_society VALUES ("'+AppNo+'","'+Rso_Name[i]+'","'+Rso_Status[i]+'");';
+            db.query(query,function(err,result,field){});
+        }
+    }
+    
     res.redirect("/form1");
 });
 
@@ -478,11 +550,11 @@ app.get("/form4",function(req,res){
         new Promise((resolve, reject) => {
             query = 'SELECT * FROM publication_summary WHERE Application_Number = "' + AppNo + '";';
             db.query(query,function(err,result,field){
-                if(result==undefined){
+                if(result==[]){
                     Ps=[];
                 }
                 else{
-                    Ps=result;
+                    Ps=result[0];
                 }
                 resolve();
             });
@@ -528,17 +600,17 @@ app.post("/form4f",function(req,res){
     nnc=req.body.nnc;
     n_p=req.body.n_p;
     n_b=req.body.n_b;
-    var Pt_inventor=req.body.Pt_inventor;
-    var Pt_title=req.body.Pt_title;
-    var Pt_DOF=req.body.Pt_DOF;
-    var Pt_DOP=req.body.Pt_DOP;
-    var Pt_number=req.body.Pt_number;
-    var Pt_status=req.body.Pt_status;
-    var Pb_type = req.body.Pb_type;
-    var Pb_title = req.body.Pb_title;
-    var Pb_author = req.body.Pb_author;
-    var Pb_YOP = req.body.Pb_YOP;
-    var Pb_docid = req.body.Pb_docid;
+    Pt_inventor=req.body.Pt_inventor;
+    Pt_title=req.body.Pt_title;
+    Pt_DOF=req.body.Pt_DOF;
+    Pt_DOP=req.body.Pt_DOP;
+    Pt_number=req.body.Pt_number;
+    Pt_status=req.body.Pt_status;
+    Pb_type = req.body.Pb_type;
+    Pb_title = req.body.Pb_title;
+    Pb_author = req.body.Pb_author;
+    Pb_YOP = req.body.Pb_YOP;
+    Pb_docid = req.body.Pb_docid;
     console.log(Pt_inventor);
     query ='DELETE FROM publication_summary WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){});
