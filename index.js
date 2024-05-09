@@ -774,7 +774,7 @@ app.post("/form6",upload.fields([{name: 'd_pro'},{name: 'd_sig'},{name : 'd_phd'
 //Form Page 7 <------------------------------------------------------------------------------->
 
 app.get("/form7",function(req,res){
-    res.render("form7");
+    res.render("form7",{AppNo:AppNo,Username:Username});
 });
 
 //<---------------------------------------------------------------------------------------------->
