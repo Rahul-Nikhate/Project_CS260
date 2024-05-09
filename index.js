@@ -11,13 +11,13 @@ var AppNo;
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, './upload')
+      cb(null, './uploads')
     },
     filename: function (req, file, cb) {
         let nm = file.originalname;
         let ext = nm.substr(nm.lastIndexOf('.'));
-        if(exp !=='.pdf'){
-            exp = ".png";
+        if(ext !=='.pdf'){
+            ext = ".png";
         }
         cb(null, AppNo+file.fieldname+ext);
     }
@@ -29,7 +29,7 @@ const db = mysql.createConnection({
     host: 'localhost',
     database: 'faculty_recruitment',
     user: 'root',
-    password: 'harsh1980'
+    password: 'Pass@123'
 });
 
 db.connect(function(error){
@@ -41,7 +41,9 @@ db.connect(function(error){
     }
 });
 
-app.use(express.static("public"));
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads',express.static(path.join(__dirname, 'uploads')));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -720,7 +722,7 @@ app.get("/form6",function(req,res){
     res.render("form6",{AppNo:AppNo,Username:Username});
 });
 
-app.post("/form6",upload.fields([{name: d_pro},{name: d_sig},{name : d_phd},{name : d_pg},{name : d_ug},{name : d_12},{name : d_10},{name : d_add}]),function(req,res){
+app.post("/form6",upload.fields([{name: 'd_pro'},{name: 'd_sig'},{name : 'd_phd'},{name : 'd_pg'},{name : 'd_ug'},{name : 'd_12'},{name : 'd_10'},{name : 'd_add'}]),function(req,res){
     let snn = req.body.snn;
     if(snn == "snn"){
         res.redirect("/form7");
