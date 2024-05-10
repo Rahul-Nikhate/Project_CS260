@@ -7,4 +7,6 @@ To Run :
 
          2.npm run start
 
-To Build style sheet using tailwind cli use : npm run devcss
+To Build style sheet using tailwind cli use : 
+
+         npm run devcss

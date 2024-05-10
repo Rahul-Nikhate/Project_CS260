@@ -365,23 +365,34 @@ app.post("/form2f",function(req,res){
     db.query(query,function(err,result,field){});
 
     // console.log(add_uni.length);
+    
+    if(typeof(add_uni)=='string'){
+        let temp = [add_uni];
+        add_uni=temp;
+        temp = [add_deg];
+        add_deg=temp;
+        temp = [add_bra];
+        add_bra=temp;
+        temp = [add_yoj];
+        add_yoj=temp;
+        temp = [add_yoc];
+        add_yoc=temp;
+        temp = [add_dur];
+        add_dur=temp;
+        temp = [add_per];
+        add_per=temp;
+        temp = [add_div];
+        add_div=temp;
+    }
     let nf = 0;
     if(add_uni !== undefined) nf = add_uni.length;
-    if(typeof(add_uni)=='string'){
-        query = 'INSERT INTO edu_add VALUES ("'+AppNo +'","'+ add_uni +'","'+ add_deg +'","'+ add_bra +'","'+ add_yoj +'","'+ add_yoc +'","'+ add_dur +'","'+ add_per +'","'+ add_div+'");';
+    for(let i = 0;i<nf;i++){
+
+        query = 'INSERT INTO edu_add VALUES ("'+AppNo +'","'+ add_uni[i] +'","'+ add_deg[i] +'","'+ add_bra[i] +'","'+ add_yoj[i] +'","'+ add_yoc[i] +'","'+ add_dur[i] +'","'+ add_per[i] +'","'+ add_div[i]+'");';
         db.query(query,function(err,result,field){});
-    }
-    else{
-        for(let i = 0;i<nf;i++){
 
-            query = 'INSERT INTO edu_add VALUES ("'+AppNo +'","'+ add_uni[i] +'","'+ add_deg[i] +'","'+ add_bra[i] +'","'+ add_yoj[i] +'","'+ add_yoc[i] +'","'+ add_dur[i] +'","'+ add_per[i] +'","'+ add_div[i]+'");';
-            db.query(query,function(err,result,field){});
-
-        }
     }
     
-    
-
     res.redirect("/form3");
 });
 
@@ -515,60 +526,77 @@ app.post("/form3f",function(req,res){
     let cnt = 0;
     if(Eh_Position !== undefined) cnt = Eh_Position.length;
     
-        for(let i=0; i<cnt;i++){
-            query = 'INSERT INTO employment_history VALUES ("'+AppNo+'","'+Eh_Position[i]+'","'+Eh_Organisation[i]+'","'+Eh_DOJ[i]+'","'+Eh_DOL[i]+'");';
-            db.query(query,function(err,result,field){});
-        }
-    
-    
-
+    for(let i=0; i<cnt;i++){
+        query = 'INSERT INTO employment_history VALUES ("'+AppNo+'","'+Eh_Position[i]+'","'+Eh_Organisation[i]+'","'+Eh_DOJ[i]+'","'+Eh_DOL[i]+'");';
+        db.query(query,function(err,result,field){});
+    }
     
     query = 'DELETE FROM research_supervision WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){});
-    let cnt2=0;
-    if(Rs_Name !== undefined) cnt2 = Rs_Name.length;
+
+    
     // console.log(Rs_Name,Rs_Degree,Rs_DOC);
     if(typeof(Rs_Name)=='string'){
-        query = 'INSERT INTO research_supervision VALUES ("'+AppNo+'","'+Rs_Name+'","'+Rs_Degree+'","'+Rs_Title+'","'+Rs_Status+'","'+Rs_DOS+'","'+Rs_DOC+'");';
-        db.query(query,function(err,result,field){});
+        let temp = [Rs_Name];
+        Rs_Name =temp;
+        temp = [Rs_Degree];
+        Rs_Degree =temp;
+        temp = [Rs_Title];
+        Rs_Title =temp;
+        temp = [Rs_Status];
+        Rs_Status =temp;
+        temp = [Rs_DOC];
+        Rs_DOC =temp;
+        temp = [Rs_DOS];
+        Rs_DOS =temp;
     }
-    else{
-        for(let i=0; i<cnt2;i++){
-            query = 'INSERT INTO research_supervision VALUES ("'+AppNo+'","'+Rs_Name[i]+'","'+Rs_Degree[i]+'","'+Rs_Title[i]+'","'+Rs_Status[i]+'","'+Rs_DOS[i]+'","'+Rs_DOC[i]+'");';
-            db.query(query,function(err,result,field){});
-        }
+
+    let cnt2=0;
+    if(Rs_Name !== undefined) cnt2 = Rs_Name.length;
+    for(let i=0; i<cnt2;i++){
+        query = 'INSERT INTO research_supervision VALUES ("'+AppNo+'","'+Rs_Name[i]+'","'+Rs_Degree[i]+'","'+Rs_Title[i]+'","'+Rs_Status[i]+'","'+Rs_DOS[i]+'","'+Rs_DOC[i]+'");';
+        db.query(query,function(err,result,field){});
     }
     
     query = 'DELETE FROM awards WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){});
+
+    if(typeof(Aw_Name)=='string'){
+        temp = [Aw_Name];
+        Aw_Name =temp;
+        temp = [Aw_Presentor];
+        Aw_Presentor =temp;
+        temp = [Aw_Year];
+        Aw_Year =temp;
+    }
+    
     let cnt3=0;
     if(Aw_Name !== undefined) cnt3 = Aw_Name.length;
-    if(typeof(Aw_Name)=='string'){
-        query = 'INSERT INTO awards VALUES ("'+AppNo+'","'+Aw_Name+'","'+Aw_Presentor+'","'+Aw_Year+'");';
+
+    for(let i=0; i<cnt3;i++){
+        query = 'INSERT INTO awards VALUES ("'+AppNo+'","'+Aw_Name[i]+'","'+Aw_Presentor[i]+'","'+Aw_Year[i]+'");';
         db.query(query,function(err,result,field){});
     }
-    else{
-        for(let i=0; i<cnt3;i++){
-            query = 'INSERT INTO awards VALUES ("'+AppNo+'","'+Aw_Name[i]+'","'+Aw_Presentor[i]+'","'+Aw_Year[i]+'");';
-            db.query(query,function(err,result,field){});
-        }
-    };
 
 
 
     query = 'DELETE FROM professional_society WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){});
+
+    
+    
+    if(typeof(Rs_Name)=='string'){
+        temp = [Rso_Name];
+        Rso_Name =temp;
+        temp = [Rso_Status];
+        Rso_Status =temp;
+    }
+
     let cnt4=0;
     if(Rso_Name !== undefined) cnt4 = Rso_Name.length;
-    if(typeof(Rs_Name)=='string'){
-        query = 'INSERT INTO professional_society VALUES ("'+AppNo+'","'+Rso_Name+'","'+Rso_Status+'");';
+    for(let i=0; i<cnt4;i++){
+        query = 'INSERT INTO professional_society VALUES ("'+AppNo+'","'+Rso_Name[i]+'","'+Rso_Status[i]+'");';
         db.query(query,function(err,result,field){});
-    }
-    else{
-        for(let i=0; i<cnt4;i++){
-            query = 'INSERT INTO professional_society VALUES ("'+AppNo+'","'+Rso_Name[i]+'","'+Rso_Status[i]+'");';
-            db.query(query,function(err,result,field){});
-        }
     }
     
     res.redirect("/form4");
@@ -678,34 +706,54 @@ app.post("/form4f",function(req,res){
     
     query = 'DELETE FROM patents WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){});
-    let cnt2=0;
-    // console.log(Pt_inventor);
-    if(Pt_inventor !== undefined) cnt2 = Pt_inventor.length;
+
+
+    
     if(typeof(Pt_inventor)=='string'){
-        query = 'INSERT INTO patents VALUES ("'+AppNo+'","'+Pt_inventor+'","'+Pt_title+'","'+Pt_DOF+'","'+Pt_DOP+'","'+Pt_number+'","'+Pt_status+'");';
-        db.query(query,function(err,result,field){});
+        temp = [Pt_inventor];
+        Pt_inventor=temp;
+        temp = [Pt_title];
+        Pt_title=temp;
+        temp = [Pt_DOF];
+        Pt_DOF=temp;
+        temp = [Pt_DOP];
+        Pt_DOP=temp;
+        temp = [Pt_number];
+        Pt_number=temp;
+        temp = [Pt_status];
+        Pt_status=temp;
     }
-    else{
-        for(let i=0; i<cnt2;i++){
-            query = 'INSERT INTO patents VALUES ("'+AppNo+'","'+Pt_inventor[i]+'","'+Pt_title[i]+'","'+Pt_DOF[i]+'","'+Pt_DOP[i]+'","'+Pt_number[i]+'","'+Pt_status[i]+'");';
-            db.query(query,function(err,result,field){});
-        }
+
+    let cnt2=0;
+    if(Pt_inventor !== undefined) cnt2 = Pt_inventor.length;
+    for(let i=0; i<cnt2;i++){
+        query = 'INSERT INTO patents VALUES ("'+AppNo+'","'+Pt_inventor[i]+'","'+Pt_title[i]+'","'+Pt_DOF[i]+'","'+Pt_DOP[i]+'","'+Pt_number[i]+'","'+Pt_status[i]+'");';
+        db.query(query,function(err,result,field){});
     }
     
     query = 'DELETE FROM publications WHERE Application_Number = "' + AppNo + '";';
     db.query(query,function(err,result,field){});
-    let cnt3=0;
-    if(Pb_type !== undefined) cnt3 = Pb_type.length;
+
+    
     if(typeof(Pb_type)=='string'){
-        query = 'INSERT INTO publications VALUES ("'+AppNo+'","'+Pb_type+'","'+Pb_author+'","'+Pb_title+'","'+Pb_YOP+'","'+Pb_docid+'");';
-        db.query(query,function(err,result,field){});
-    }else{
-        for(let i=0; i<cnt3;i++){
-            query = 'INSERT INTO publications VALUES ("'+AppNo+'","'+Pb_type[i]+'","'+Pb_author[i]+'","'+Pb_title[i]+'","'+Pb_YOP[i]+'","'+Pb_docid[i]+'");';
-            db.query(query,function(err,result,field){});
-        }
+        temp=[Pb_type];
+        Pb_type = temp;
+        temp=[Pb_title];
+        Pb_title = temp;
+        temp=[Pb_author];
+        Pb_author = temp;
+        temp=[Pb_YOP];
+        Pb_YOP = temp;
+        temp=[Pb_docid];
+        Pb_docid = temp;
     }
     
+    let cnt3=0;
+    if(Pb_type !== undefined) cnt3 = Pb_type.length;
+    for(let i=0; i<cnt3;i++){
+        query = 'INSERT INTO publications VALUES ("'+AppNo+'","'+Pb_type[i]+'","'+Pb_author[i]+'","'+Pb_title[i]+'","'+Pb_YOP[i]+'","'+Pb_docid[i]+'");';
+        db.query(query,function(err,result,field){});
+    }
     
     res.redirect("/form5");
 });
