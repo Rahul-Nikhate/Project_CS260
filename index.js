@@ -29,7 +29,7 @@ const db = mysql.createConnection({
     host: '127.0.0.1',
     database: 'faculty_recruitment',
     user: 'root',
-    password: 'harsh1980'
+    password: 'Pass@123'
 });
 
 db.connect(function(error){
@@ -64,7 +64,8 @@ res_con,tea_con,pro_ser,por_add,
 nij,nic,nnj,nnc,n_p,n_b,Ps={inter_journals:4},
 Pt,Pt_inventor=[],Pt_title=[],Pt_DOF=[],Pt_DOP=[],Pt_number=[],Pt_status=[],Pt_DOFi=[],Pt_DOPi=[],
 Pb,Pb_type=[],Pb_title=[],Pb_type=[],Pb_author=[],Pb_YOP=[],Pb_docid=[],
-d_phd,d_pg,d_ug,d_12,d_10,d_add,d_pro,d_sig
+d_phd,d_pg,d_ug,d_12,d_10,d_add,d_pro,d_sig,
+cnt10,cnt2,cnt3,cnt4,cnt5,cnt6
 ;
 
 
@@ -552,7 +553,7 @@ app.post("/form3f",function(req,res){
         Rs_DOS =temp;
     }
 
-    var cnt2=0;
+    cnt2=0;
     if(Rs_Name !== undefined) cnt2 = Rs_Name.length;
     for(let i=0; i<cnt2;i++){
         query = 'INSERT INTO research_supervision VALUES ("'+AppNo+'","'+Rs_Name[i]+'","'+Rs_Degree[i]+'","'+Rs_Title[i]+'","'+Rs_Status[i]+'","'+Rs_DOS[i]+'","'+Rs_DOC[i]+'");';
@@ -571,7 +572,7 @@ app.post("/form3f",function(req,res){
         Aw_Year =temp;
     }
     
-    var cnt3=0;
+    cnt3=0;
     if(Aw_Name !== undefined) cnt3 = Aw_Name.length;
 
     for(let i=0; i<cnt3;i++){
@@ -595,7 +596,7 @@ app.post("/form3f",function(req,res){
 
     // console.log(Rso_Name);
 
-    var cnt4=0;
+    cnt4=0;
     if(Rso_Name !== undefined) cnt4 = Rso_Name.length;
     for(let i=0; i<cnt4;i++){
         query = 'INSERT INTO professional_society VALUES ("'+AppNo+'","'+Rso_Name[i]+'","'+Rso_Status[i]+'");';
@@ -727,7 +728,7 @@ app.post("/form4f",function(req,res){
         Pt_status=temp;
     }
 
-    var cnt5=0;
+    cnt5=0;
     if(Pt_inventor !== undefined) cnt5 = Pt_inventor.length;
     for(let i=0; i<cnt5;i++){
         query = 'INSERT INTO patents VALUES ("'+AppNo+'","'+Pt_inventor[i]+'","'+Pt_title[i]+'","'+Pt_DOF[i]+'","'+Pt_DOP[i]+'","'+Pt_number[i]+'","'+Pt_status[i]+'");';
@@ -751,7 +752,7 @@ app.post("/form4f",function(req,res){
         Pb_docid = temp;
     }
     
-    var cnt6=0;
+    cnt6=0;
     if(Pb_type !== undefined) cnt6= Pb_type.length;
     for(let i=0; i<cnt6;i++){
         query = 'INSERT INTO publications VALUES ("'+AppNo+'","'+Pb_type[i]+'","'+Pb_author[i]+'","'+Pb_title[i]+'","'+Pb_YOP[i]+'","'+Pb_docid[i]+'");';
