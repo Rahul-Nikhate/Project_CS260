@@ -29,7 +29,7 @@ const db = mysql.createConnection({
     host: '127.0.0.1',
     database: 'faculty_recruitment',
     user: 'root',
-    password: 'Pass@123'
+    password: 'harsh1980'
 });
 
 db.connect(function(error){
@@ -592,7 +592,7 @@ app.post("/form3f",function(req,res){
         Rso_Status =temp;
     }
 
-    console.log(Rso_Name);
+    // console.log(Rso_Name);
 
     let cnt4=0;
     if(Rso_Name !== undefined) cnt4 = Rso_Name.length;
