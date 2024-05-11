@@ -386,6 +386,7 @@ app.post("/form2f",function(req,res){
     }
     let nf = 0;
     if(add_uni !== undefined) nf = add_uni.length;
+    cnt_ae = nf;
     for(let i = 0;i<nf;i++){
 
         query = 'INSERT INTO edu_add VALUES ("'+AppNo +'","'+ add_uni[i] +'","'+ add_deg[i] +'","'+ add_bra[i] +'","'+ add_yoj[i] +'","'+ add_yoc[i] +'","'+ add_dur[i] +'","'+ add_per[i] +'","'+ add_div[i]+'");';
@@ -523,10 +524,10 @@ app.post("/form3f",function(req,res){
         // db.query(query,function(err,result,field){});
     }
 
-    let cnt = 0;
-    if(Eh_Position !== undefined) cnt = Eh_Position.length;
+    var cnt10 = 0;
+    if(Eh_Position !== undefined) cnt10 = Eh_Position.length;
     
-    for(let i=0; i<cnt;i++){
+    for(let i=0; i<cnt10;i++){
         query = 'INSERT INTO employment_history VALUES ("'+AppNo+'","'+Eh_Position[i]+'","'+Eh_Organisation[i]+'","'+Eh_DOJ[i]+'","'+Eh_DOL[i]+'");';
         db.query(query,function(err,result,field){});
     }
@@ -551,7 +552,7 @@ app.post("/form3f",function(req,res){
         Rs_DOS =temp;
     }
 
-    let cnt2=0;
+    var cnt2=0;
     if(Rs_Name !== undefined) cnt2 = Rs_Name.length;
     for(let i=0; i<cnt2;i++){
         query = 'INSERT INTO research_supervision VALUES ("'+AppNo+'","'+Rs_Name[i]+'","'+Rs_Degree[i]+'","'+Rs_Title[i]+'","'+Rs_Status[i]+'","'+Rs_DOS[i]+'","'+Rs_DOC[i]+'");';
@@ -570,7 +571,7 @@ app.post("/form3f",function(req,res){
         Aw_Year =temp;
     }
     
-    let cnt3=0;
+    var cnt3=0;
     if(Aw_Name !== undefined) cnt3 = Aw_Name.length;
 
     for(let i=0; i<cnt3;i++){
@@ -594,7 +595,7 @@ app.post("/form3f",function(req,res){
 
     // console.log(Rso_Name);
 
-    let cnt4=0;
+    var cnt4=0;
     if(Rso_Name !== undefined) cnt4 = Rso_Name.length;
     for(let i=0; i<cnt4;i++){
         query = 'INSERT INTO professional_society VALUES ("'+AppNo+'","'+Rso_Name[i]+'","'+Rso_Status[i]+'");';
@@ -726,9 +727,9 @@ app.post("/form4f",function(req,res){
         Pt_status=temp;
     }
 
-    let cnt2=0;
-    if(Pt_inventor !== undefined) cnt2 = Pt_inventor.length;
-    for(let i=0; i<cnt2;i++){
+    var cnt5=0;
+    if(Pt_inventor !== undefined) cnt5 = Pt_inventor.length;
+    for(let i=0; i<cnt5;i++){
         query = 'INSERT INTO patents VALUES ("'+AppNo+'","'+Pt_inventor[i]+'","'+Pt_title[i]+'","'+Pt_DOF[i]+'","'+Pt_DOP[i]+'","'+Pt_number[i]+'","'+Pt_status[i]+'");';
         db.query(query,function(err,result,field){});
     }
@@ -750,9 +751,9 @@ app.post("/form4f",function(req,res){
         Pb_docid = temp;
     }
     
-    let cnt3=0;
-    if(Pb_type !== undefined) cnt3 = Pb_type.length;
-    for(let i=0; i<cnt3;i++){
+    var cnt6=0;
+    if(Pb_type !== undefined) cnt6= Pb_type.length;
+    for(let i=0; i<cnt6;i++){
         query = 'INSERT INTO publications VALUES ("'+AppNo+'","'+Pb_type[i]+'","'+Pb_author[i]+'","'+Pb_title[i]+'","'+Pb_YOP[i]+'","'+Pb_docid[i]+'");';
         db.query(query,function(err,result,field){});
     }
@@ -842,8 +843,8 @@ app.get("/pdf",function(req,res){
         EmpHis:EmpHis,ResSup:ResSup,Aw:Aw,Rso:Rso,Eh_Position:Eh_Position,Eh_Organisation:Eh_Organisation,Eh_DOJ:Eh_DOL,Eh_DOL:Eh_DOL,
         Rs_Name:Rs_Name,Rs_DOC:Rs_DOC,Rs_DOS:Rs_DOS,Rs_Degree:Rs_Degree,Rs_Status:Rs_Degree,Rs_Status:Rs_Status,Rs_Title:Rs_Title,Aw_Name:Aw_Name,Aw_Presentor:Aw_Presentor,Aw_Year:Aw_Year,Rso_Name:Rso_Name,Rso_Status:Rso_Status,
         AppNo:AppNo,Username:Username,Pb:Pb,Ps:Ps,Pt:Pt,nij:nij,nic:nic,nnj:nnj,nnc:nnc,n_p:n_p,n_b,n_b,Pb_YOP:Pb_YOP,Pb_author:Pb_author,
-        Pb_docid:Pb_docid,Pb_title:Pb_title,Pb_type:Pb_type,Pt_DOF:Pt_DOF,Pt_DOP:Pt_DOP,Pt_inventor:Pt_inventor,Pt_number:Pt_number,Pt_status:Pt_status,Pt_title:Pt_title
-    
+        Pb_docid:Pb_docid,Pb_title:Pb_title,Pb_type:Pb_type,Pt_DOF:Pt_DOF,Pt_DOP:Pt_DOP,Pt_inventor:Pt_inventor,Pt_number:Pt_number,Pt_status:Pt_status,Pt_title:Pt_title,
+        cnt2:cnt2,cnt3:cnt3,cnt4:cnt4,cnt5:cnt5,cnt6:cnt6,cnt10:cnt10
     
     });
 });
