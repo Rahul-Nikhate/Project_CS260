@@ -26,7 +26,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage:storage });
 
 const db = mysql.createConnection({
-    host: 'localhost',
+    host: '127.0.0.1',
     database: 'faculty_recruitment',
     user: 'root',
     password: 'Pass@123'
@@ -585,12 +585,14 @@ app.post("/form3f",function(req,res){
 
     
     
-    if(typeof(Rs_Name)=='string'){
+    if(typeof(Rso_Name)=='string'){
         temp = [Rso_Name];
         Rso_Name =temp;
         temp = [Rso_Status];
         Rso_Status =temp;
     }
+
+    console.log(Rso_Name);
 
     let cnt4=0;
     if(Rso_Name !== undefined) cnt4 = Rso_Name.length;
