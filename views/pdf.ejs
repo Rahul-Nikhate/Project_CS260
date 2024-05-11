@@ -560,8 +560,8 @@
             <div class="bg-white border-2 border-gray-300 sm:col-span-6 mt-1 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 py-5 px-5 rounded-md">                
                 <div  class="sm:col-span-7  border-b border-gray-900/30 px-0 py-0">
                 <p class=" inline text-xl font-weight-450 leading-7 text-gray-900">Publication Summary</p> 
-            </div>
-            <div class="sm:col-span-2 sm:col-start-1">
+                </div>
+                <div class="sm:col-span-2 sm:col-start-1">
                     <label class="block text-sm font-medium leading-6 text-gray-900">No. of International Journals&#42</label>
                     <div class="mt-2">
                     <div type="text" name="nij" value="" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"><%= nij%></div> 
@@ -597,6 +597,117 @@
                     <div type="text" name="n_p" value=""  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"><%= n_p%></div> 
                     </div>
                 </div>
+
+                <div  class="sm:col-span-8 sm:col-start-1  border-b border-gray-900/30 px-0 py-0">
+                    <p class=" inline text-xl font-weight-450 leading-7 text-gray-900">List Of Patents</p> 
+                </div>
+                <div  class="field-set sm:col-span-8 grid sm:grid-cols-8 gap-x-6 gap-y-1 px-0 py-0">
+                    <div class="sm:col-span-2 sm:col-start-1">
+                        <label class="block text-sm font-medium leading-6 text-gray-900">Inventor&#42</label>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-sm font-medium leading-6 text-gray-900">Title&#42</label>
+                    </div>
+                    <div class="sm:col-span-1">
+                        <label class="block text-sm font-medium leading-6 text-gray-900">Date Of Filing&#42</label>
+                    </div>
+                    <div class="sm:col-span-1">
+                        <label class="block text-sm font-medium leading-6 text-gray-900">Date Of Publication&#42</label>
+                    </div>
+                    <div class="sm:col-span-1 ">
+                        <label class="block text-sm font-medium leading-6 text-gray-900">Patent Number&#42</label>
+                    </div>
+                    <div class="sm:col-span-1 ">
+                        <label class="block text-sm font-medium leading-6 text-gray-900">Status&#42</label>
+                    </div>
+                </div>
+                <% for(let i=0; i < Pt.length; i++){ %>
+                    <div  class="field-set grid sm:col-span-7 sm:grid-cols-8 gap-x-6 gap-y-1 px-0 py-0">
+                    <div class="sm:col-span-2 sm:col-start-1">
+                        <div class="mt-2">
+                        <div type="text" name="Pt_inventor" value="" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"><%= Pt_inventor[i] %></div> 
+                        </div>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <div class="mt-2">
+                        <div type="text" name="Pt_title" value=""  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"><%= Pt_title[i]%></div> 
+                        </div>
+                    </div>
+                    <div class="sm:col-span-1">
+                        <div class="mt-1">
+                        <div type="date" name="Pt_DOF" value=''  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"><%= Pt_DOF[i] %></div> 
+                        </div>
+                    </div>
+                    <div class="sm:col-span-1">
+                        <div class="mt-1">
+                        <div type="date" name="Pt_DOP" value=''  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"><%= Pt_DOP[i] %></div> 
+                        </div>
+                    </div>
+                    <div class="sm:col-span-1 ">
+                        <div class="mt-2">
+                        <div type="text" name="Pt_number" value="" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"><%= Pt_number[i] %></div> 
+                        </div>
+                    </div>
+                    <div class="sm:col-span-1">
+                        <div class="mt-2">
+                        <div type="text" name="Pt_status" value="" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"><%= Pt_status[i] %></div> 
+                        </div>
+                    </div>
+                    </div>
+                <% }%>
+
+                <div  class="sm:col-span-8  border-b border-gray-900/30 px-0 py-0">
+                    <p class=" inline text-xl sm:col-span-8 font-weight-450 leading-7 text-gray-900">List Of Publications</p> 
+                </div>
+                <div  class="grid sm:grid-cols-8 sm:col-span-8 gap-x-6 gap-y-1 px-0 py-0">
+                    <div class="sm:col-span-2 sm:col-start-1">
+                        <label class="block text-sm font-medium leading-6 text-gray-900">Type&#42</label>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-sm font-medium leading-6 text-gray-900">Title&#42</label>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-sm font-medium leading-6 text-gray-900">Author&#42</label>
+                    </div>
+                    <div class="sm:col-span-1">
+                        <label class="block text-sm font-medium leading-6 text-gray-900">Year Of Publication&#42</label>
+                    </div>
+                    <div class="sm:col-span-1">
+                        <label class="block text-sm font-medium leading-6 text-gray-900">Document_Id&#42</label>
+                    </div>
+                </div>
+                <% for(let i=0; i < Pb.length; i++){ %>
+                    <div  class="field-set grid sm:col-span-8 sm:grid-cols-8 gap-x-6 gap-y-1 px-0 py-0">
+                    <div class="sm:col-span-2 sm:col-start-1">
+                        <div class="mt-2">
+                        <div type="text" name="Pb_type" value="" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"><%= Pb_type[i] %></div>
+                        </div>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <div class="mt-2">
+                        <div type="text" name="Pb_title" value=""  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"><%= Pb_title[i] %></div>
+                        </div>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <div class="mt-2">
+                        <div type="text" name="Pb_author" value=''  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"><%= Pb_author[i] %></div>
+                        </div>
+                    </div>
+                    <div class="sm:col-span-1">
+                        <div class="mt-2">
+                        <div type="text" name="Pb_YOP" value=''  class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"><%= Pb_YOP[i]%></div>
+                        </div>
+                    </div>
+                    <div class="sm:col-span-1">
+                        <div class="mt-2">
+                        <div type="text" name="Pb_docid" value="" class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"><%= Pb_docid[i] %></div>
+                        </div>
+                    </div>
+                    </div>
+                <% }%>
+
+
+
             </div>
 
             <div class="mt-5">
